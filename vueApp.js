@@ -36,11 +36,13 @@ window.app = new Vue({
             return {
                 method: {
                     slug: this.subscription.method.slug,
+                    price: this.subscription.method.price
                 },
                 products: this.subscription.products.map(function(prod){
                     return {
                         slug: prod.slug,
-                        quantity: prod.quantity
+                        quantity: prod.quantity,
+                        price: prod.price
                     }
                 })
             }
