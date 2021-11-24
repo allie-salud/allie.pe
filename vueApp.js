@@ -1,0 +1,177 @@
+function _round2(dec){
+    return Math.round( (dec + Number.EPSILON) * 100 ) / 100;
+};
+Vue.filter('prepend', function (value, prependValue) {
+    return prependValue + value;
+});
+Vue.filter('currencyValue', function (value) {
+    return _round2(value).toFixed(2);
+})
+Vue.filter('toJsonString', function(object) { return JSON.stringify(object); });
+window.app = new Vue({
+    el: '#subscribe-form',
+    data: {
+        errors: {
+            1: null,
+            2: null,
+            3: null,
+            4: null
+        },
+        subscription: {
+            method: {},
+            products: [],
+        },
+        payment: {},
+        cardSet: false
+    },
+    computed: {
+        cartWithProducts: function(){},
+        methodSubtotal: function(){ return this.subscription.method.price || 0 },
+        productsSubtotal: function(){ return this.subscription.products.reduce(function (sum, product){ return sum + product.price * product.quantity }, 0); },
+        deliverySubtotal: function(){ return 5;},
+        subscriptionTotal: function() {
+            return this.methodSubtotal + this.productsSubtotal + this.deliverySubtotal;
+        },
+        subDetails: function() {
+            return {
+                method: {
+                    slug: this.subscription.method.slug,
+                },
+                products: this.subscription.products.map(function(prod){
+                    return {
+                        slug: prod.slug,
+                        quantity: prod.quantity
+                    }
+                })
+            }
+        }
+    },
+    methods: {
+        validateForm: function(index){
+            console.log("Validating step", index);
+            switch (index) {
+                case 1:
+                    var noDelivery = (this.methodSubtotal + this.productsSubtotal);
+                    console.log("noDelivery", noDelivery);
+                    if (noDelivery > 0 && noDelivery < 10.00) {
+                        this.errors[index] = "El monto total de la suscripción debe ser mayor o igual a 15 soles."
+                    } else if (noDelivery == 0) {
+                        this.errors[index] = "No tienes productos en el carrito";
+                    } else {
+                        this.errors[index] = false;
+                    };
+                    break;
+                case 2:
+                    var error;
+                    var inputs = [
+                        $('#email'),
+                        $('#nombres'),
+                        $('#apellidos'),
+                        $("#birthdatestr"),
+                        $("#phone"),
+                        $("#email")
+                    ]
+
+                    for (var i = 0; i < inputs.length; i++) {
+                        var _input = inputs[i].get(0);
+
+                        if (!_input.checkValidity()) {
+                            error = "Por favor, ingresa correctamente todos los campos requeridos.";
+                            // _input.reportValidity()
+                            break;
+                        }
+                    }
+                    if (error){
+                        this.errors[index] = error;
+                    } else {
+                        this.errors[index] = false;
+                    }
+                    break;
+                case 3:
+                var error;
+                    var inputs = [
+                        $('#direccion'),
+                        $('#distrito'),
+                        $('#subscription_startdate'),
+                        $("#horario_entrega"),
+                    ]
+
+                    for (var i = 0; i < inputs.length; i++) {
+                        var _input = inputs[i].get(0);
+
+                        if (!_input.checkValidity()) {
+                            error = "Por favor, ingresa correctamente todos los campos requeridos.";
+                            // _input.reportValidity()
+                            break;
+                        }
+                    }
+
+                    if (error){
+                        this.errors[index] = error;
+                    } else {
+                        this.errors[index] = false;
+                    }
+                    break;
+                case 4:
+                    var selected = $('[name="medio_pago"]:checked').val()
+
+                    if (!selected || (selected == 'kushki' && !$('#kushki_token_input').val())) {
+                        $('[name="medio_pago"]').prop('checked', false);
+                        $('.card-pago .w-radio-input').removeClass('w--redirected-checked');
+                        this.errors[index] = "Por favor, seleccione un método de pago."
+                    } else {
+                        this.errors[index] = false;
+                    }
+                    return;
+            }
+            console.log(this.errors);
+        },
+        hasErrors: function(index){ return this.getErrors(index); }, // Se mantiene por motivos de compatibilidad
+        getErrors: function(index){
+            return this.errors[index];
+        },
+        removeMethod: function(){
+            this.subscription.method = {};
+            $('.product-select-radio-button-wrapper input').prop('checked', false).parent().parent().removeClass('selected');
+            this.validateForm(1);
+        },
+        setCard: function(lastDigits, expiryDate){
+            this.payment.number = lastDigits;
+            this.payment.expiryDate = expiryDate;
+            this.cardSet = true;
+        },
+        updateCart: function(productData, event){
+            var quantity = parseInt(event.target.value);
+            if ( Number.isInteger(quantity) ) {
+                console.log("Quantity updated ("+ quantity + ") for product " + productData.slug);
+                var cartItemIndex = this.subscription.products.findIndex(
+                function(product){ return product.slug == productData.slug});
+                if (cartItemIndex < 0) {
+                    this.subscription.products.push({
+                        slug: productData.slug,
+                        title: productData.title,
+                        price: productData.price,
+                        brand: productData.brand,
+                        lab: productData.lab,
+                        presentation: productData.presentation,
+                        image: productData.image,
+                        quantity: quantity,
+                        _type: productData._type,
+                    })
+                } else {
+                    // cartItem.price : productData.price;
+                    if (quantity < 1) {
+                        this.subscription.products.splice(cartItemIndex, 1);
+                    } else {
+                        this.subscription.products[cartItemIndex].quantity = quantity;
+                    }
+                }
+                console.log('input_qty_' + productData.slug);
+                document.getElementById('input_qty_' + productData.slug).value = quantity;
+            } else {
+                console.error("Not a valid quantity");
+            }
+            this.validateForm(1);
+        }
+    }
+})
