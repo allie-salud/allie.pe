@@ -23,7 +23,7 @@ FIELDS.DOCUMENT_TYPE.removeAttr('role');
 var TODAY_DATE = new Date();
 var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
 var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
-var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO_STR.toISOString().slice(0, 10);
+var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO.toISOString().slice(0, 10);
 
 FIELDS.BIRTHDATE.atr('max', TODAY_STR);
 FIELDS.BIRTHDATE.atr('min', HUNDRED_YEARS_AGO_STR);
@@ -170,7 +170,6 @@ window.app = new Vue({
                     }
                     return;
             }
-            console.log(this.errors);
         },
         hasErrors: function(index){ return this.getErrors(index); }, // Se mantiene por motivos de compatibilidad
         getErrors: function(index){
