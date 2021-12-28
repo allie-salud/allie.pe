@@ -19,7 +19,7 @@ var NUMERIC_INPUTS = [
     FIELDS.PHONE
 ]
 
-FIELDS.DOCUMENT_TYPE.removeAttr('role');
+FIELDS.DOCUMENT_NUMBER.removeAttr('role');
 var TODAY_DATE = new Date();
 var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
 var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
@@ -114,6 +114,7 @@ window.app = new Vue({
                         FIELDS.GIVEN_NAME,
                         FIELDS.FAMILY_NAME,
                         FIELDS.BIRTHDATE_STR,
+                        FIELDS.BIRTHDATE,
                         FIELDS.PHONE,
                         FIELDS.EMAIL
                     ]
