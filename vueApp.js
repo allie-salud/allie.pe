@@ -1,3 +1,47 @@
+var FIELDS = {
+    DOCUMENT_TYPE: $('#documento_tipo'),
+    DOCUMENT_NUMBER: $('#documento_numero'),
+    EMAIL: $('#email'),
+    GIVEN_NAME: $('#nombres'),
+    FAMILY_NAME: $('#apellidos'),
+    BIRTHDATE_STR: $("#birthdatestr"),
+    BIRTHDATE: $('#birthdate'),
+    PHONE: $("#phone"),
+    EMAIL: $("#email"),
+    ADDRESS: $('#direccion'),
+    DISTRICT: $('#distrito'),
+    FIRST_DELIVERY_DATE: $('#subscription_startdate'),
+    FIRST_DELIVERY_SCHEDULE: $("#horario_entrega"),
+}
+
+var NUMERIC_INPUTS = [
+    FIELDS.DOCUMENT_NUMBER,
+    FIELDS.PHONE
+]
+
+FIELDS.DOCUMENT_TYPE.removeAttr('role');
+var TODAY_DATE = new Date();
+var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
+var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
+var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO_STR.toISOString().slice(0, 10);
+
+FIELDS.BIRTHDATE.atr('max', TODAY_STR);
+FIELDS.BIRTHDATE.atr('min', HUNDRED_YEARS_AGO_STR);
+
+var ONLY_DIGITS = function(value){
+    if (/\D/g.test(value)) {
+        value = value.replace(/\D/g,'')
+    }
+    return value
+}
+
+for (var i = 0; i < NUMERIC_INPUTS.length; i++) {
+    var _field = NUMERIC_INPUTS[i];
+    _field.on('input', function(){
+        this.value = ONLY_DIGITS(this.value);
+    })
+}
+
 function _round2(dec){
     return Math.round( (dec + Number.EPSILON) * 100 ) / 100;
 };
@@ -66,12 +110,12 @@ window.app = new Vue({
                 case 2:
                     var error;
                     var inputs = [
-                        $('#email'),
-                        $('#nombres'),
-                        $('#apellidos'),
-                        $("#birthdatestr"),
-                        $("#phone"),
-                        $("#email")
+                        FIELDS.EMAIL,
+                        FIELDS.GIVEN_NAME,
+                        FIELDS.FAMILY_NAME,
+                        FIELDS.BIRTHDATE_STR,
+                        FIELDS.PHONE,
+                        FIELDS.EMAIL
                     ]
 
                     for (var i = 0; i < inputs.length; i++) {
@@ -92,10 +136,10 @@ window.app = new Vue({
                 case 3:
                 var error;
                     var inputs = [
-                        $('#direccion'),
-                        $('#distrito'),
-                        $('#subscription_startdate'),
-                        $("#horario_entrega"),
+                        FIELDS.ADDRESS,
+                        FIELDS.DISTRICT,
+                        FIELDS.FIRST_DELIVERY_DATE,
+                        FIELDS.FIRST_DELIVERY_SCHEDULE,
                     ]
 
                     for (var i = 0; i < inputs.length; i++) {
