@@ -25,8 +25,8 @@ var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
 var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
 var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO.toISOString().slice(0, 10);
 
-FIELDS.BIRTHDATE.atr('max', TODAY_STR);
-FIELDS.BIRTHDATE.atr('min', HUNDRED_YEARS_AGO_STR);
+FIELDS.BIRTHDATE.attr('max', TODAY_STR);
+FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
 
 var ONLY_DIGITS = function(value){
     if (/\D/g.test(value)) {
