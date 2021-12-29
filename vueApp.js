@@ -24,11 +24,11 @@ FIELDS.DOCUMENT_TYPE.on('change', function(){
     FIELDS.DOCUMENT_NUMBER.val("");
 
     if (this.value == 'dni'){
-        FIELDS.DOCUMENT_NUMBER.attr('min', 8)
-        FIELDS.DOCUMENT_NUMBER.attr('max', 8)
+        FIELDS.DOCUMENT_NUMBER.attr('minlength', 8)
+        FIELDS.DOCUMENT_NUMBER.attr('maxlength', 8)
     } else {
-        FIELDS.DOCUMENT_NUMBER.attr('min', 12)
-        FIELDS.DOCUMENT_NUMBER.attr('max', 12)
+        FIELDS.DOCUMENT_NUMBER.attr('minlength', 12)
+        FIELDS.DOCUMENT_NUMBER.attr('maxlength', 12)
     }
 })
 
