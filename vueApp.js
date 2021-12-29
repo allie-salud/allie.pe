@@ -32,6 +32,18 @@ FIELDS.DOCUMENT_TYPE.on('change', function(){
     }
 })
 
+var FIRST_DELIVERY_DATE_PICKER = FIELDS.FIRST_DELIVERY_DATE.data('datepicker');
+FIELDS.FIRST_DELIVERY_DATE.on('change', function(){
+    if (this.checkValidity()){
+        var dateParts = this.value.split("/");
+        var date = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, dateParts[0])
+        FIRST_DELIVERY_DATE_PICKER.selectDate(date);
+    } else {
+        this.reportValidity();
+    }
+
+})
+
 var TODAY_DATE = new Date();
 var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
 var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
