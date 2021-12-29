@@ -141,6 +141,7 @@ window.app = new Vue({
                 case 2:
                     var error;
                     var inputs = [
+                        FIELDS.DOCUMENT_NUMBER,
                         FIELDS.EMAIL,
                         FIELDS.GIVEN_NAME,
                         FIELDS.FAMILY_NAME,
