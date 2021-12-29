@@ -20,6 +20,18 @@ var NUMERIC_INPUTS = [
 ]
 
 FIELDS.DOCUMENT_NUMBER.removeAttr('role');
+FIELDS.DOCUMENT_TYPE.on('change', function(){
+    FIELDS.DOCUMENT_NUMBER.val("");
+
+    if (this.value == 'dni'){
+        FIELDS.DOCUMENT_NUMBER.attr('min', 8)
+        FIELDS.DOCUMENT_NUMBER.attr('max', 8)
+    } else {
+        FIELDS.DOCUMENT_NUMBER.attr('min', 12)
+        FIELDS.DOCUMENT_NUMBER.attr('max', 12)
+    }
+})
+
 var TODAY_DATE = new Date();
 var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
 var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
