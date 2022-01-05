@@ -52,13 +52,13 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
         } else if (!self.checkValidity() && !self.validity.customError){
             self.reportValidity();
         } else {
+            var bd_element = FIELDS.BIRTHDATE.get(0);
             var date_parts = self.value.split("/");
-            var date_obj_parts = FIELDS.BIRTHDATE.get(0).value.split("-").reverse();
+            var date_obj_parts = bd_element.value.split("-").reverse();
 
             if (date_parts.join() == date_obj_parts.join()){
-                if (!FIELDS.BIRTHDATE.checkValidity()){
-                    customValidity =
-                    self.setCustomValidity(FIELDS.BIRTHDATE.validationMessage);
+                if (!bd_element.checkValidity()){
+                    self.setCustomValidity(bd_element.validationMessage);
                     window.app.validateForm(2);
                 } else {
                     self.setCustomValidity('');
