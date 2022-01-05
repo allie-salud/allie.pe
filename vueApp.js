@@ -48,6 +48,7 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
     setTimeout(function(){
         if (self.value == '00/00/0000'){
             self.value = '';
+            window.app.validateForm(2);
         } else if (!self.checkValidity()){
             self.reportValidity();
         } else {
@@ -66,7 +67,7 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
                 self.reportValidity();
             }
         }
-    }, 100)
+    }, 10)
 })
 
 var FIRST_DELIVERY_DATE_PICKER = FIELDS.FIRST_DELIVERY_DATE.data('datepicker');
