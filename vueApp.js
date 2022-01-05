@@ -49,7 +49,7 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
         if (self.value == '00/00/0000'){
             self.value = '';
             window.app.validateForm(2);
-        } else if (!self.checkValidity()){
+        } else if (!self.checkValidity() && !this.validity.customError){
             self.reportValidity();
         } else {
             var date_parts = self.value.split("/");
