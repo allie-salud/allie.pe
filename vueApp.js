@@ -43,13 +43,14 @@ FIELDS.BIRTHDATE.attr('max', TODAY_STR);
 FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
 
 FIELDS.BIRTHDATE_STR.on('change', function(){
+    var self = this;
     setTimeout(function(){
-        if (this.value == '00/00/0000'){
-            this.value == '';
-        } else if (!this.checkValidity()){
-            this.reportValidity();
+        if (self.value == '00/00/0000'){
+            self.value == '';
+        } else if (!self.checkValidity()){
+            self.reportValidity();
         } else {
-            var date_parts = this.value.split("/");
+            var date_parts = self.value.split("/");
             var day = date_parts[0], month = parseInt(date_parts[1]) - 1, year = date_parts[2];
             var date_str = new Date(year, month, day);
             console.log("date_str", date_str)
