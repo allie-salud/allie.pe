@@ -42,7 +42,7 @@ var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO.toISOString().slice(0, 10);
 FIELDS.BIRTHDATE.attr('max', TODAY_STR);
 FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
 
-FIELDS.BIRTHDATE_STR.on('change', function(){
+FIELDS.BIRTHDATE_STR.on('change blur', function(){
     var self = this;
     console.log('change', self.value);
     setTimeout(function(){
