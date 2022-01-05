@@ -55,10 +55,7 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
             var date_parts = self.value.split("/");
             var date_obj_parts = FIELDS.BIRTHDATE.get(0).value.split("-").reverse();
 
-            console.log("date_parts", date_parts);
-            console.log("date_obj_parts", date_obj_parts);
-
-            if (date_parts == date_obj_parts){
+            if (date_parts.join() == date_obj_parts.join()){
                 self.setCustomValidity('');
                 // Check input[type="date"] validations
                 // console.log("valid?", $date.get(0).checkValidity())
