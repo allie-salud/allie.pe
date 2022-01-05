@@ -56,10 +56,13 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
             var date_obj_parts = FIELDS.BIRTHDATE.get(0).value.split("-").reverse();
 
             if (date_parts.join() == date_obj_parts.join()){
-                self.setCustomValidity('');
-                // Check input[type="date"] validations
-                // console.log("valid?", $date.get(0).checkValidity())
-                // console.log($date.get(0).validationMessage);
+                if (!FIELDS.BIRTHDATE.checkValidity()){
+                    customValidity =
+                    self.setCustomValidity(FIELDS.BIRTHDATE.validationMessage);
+                    window.app.validateForm(2);
+                } else {
+                    self.setCustomValidity('');
+                }
             } else {
                 self.setCustomValidity("Por favor elija una fecha válida");
                 self.reportValidity();
