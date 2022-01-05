@@ -47,7 +47,7 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
     console.log('change', self.value);
     setTimeout(function(){
         if (self.value == '00/00/0000'){
-            self.value == '';
+            self.value = '';
         } else if (!self.checkValidity()){
             self.reportValidity();
         } else {
