@@ -163,6 +163,7 @@ window.app = new Vue({
                     this.errors[index] = false;
                 };
                 break;
+
                 case 2:
                 var error;
                 var inputs = [
@@ -171,7 +172,7 @@ window.app = new Vue({
                     FIELDS.GIVEN_NAME,
                     FIELDS.FAMILY_NAME,
                     FIELDS.BIRTHDATE_STR,
-                    FIELDS.BIRTHDATE,
+                    // FIELDS.BIRTHDATE,
                     FIELDS.PHONE,
                     FIELDS.EMAIL
                 ]
@@ -191,6 +192,7 @@ window.app = new Vue({
                     this.errors[index] = false;
                 }
                 break;
+
                 case 3:
                 var error;
                 var inputs = [
@@ -216,6 +218,7 @@ window.app = new Vue({
                     this.errors[index] = false;
                 }
                 break;
+
                 case 4:
                 var selected = $('[name="medio_pago"]:checked').val()
 
