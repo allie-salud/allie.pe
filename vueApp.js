@@ -42,6 +42,31 @@ var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO.toISOString().slice(0, 10);
 FIELDS.BIRTHDATE.attr('max', TODAY_STR);
 FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
 
+FIELDS.BIRTHDATE_STR.on('change', function(){
+    setTimeout(function(){
+        if (this.value == '00/00/0000'){
+            this.value == '';
+        } else if (!this.checkValidity()){
+            this.reportValidity();
+        } else {
+            var date_parts = this.value.split("/");
+            var day = date_parts[0], month = parseInt(date_parts[1]) - 1, year = date_parts[2];
+            var date_str = new Date(year, month, day);
+            console.log("date_str", date_str)
+            var date = FIELDS.BIRTHDATE.get(0).valueAsDate;
+            if (date == date_str){
+                self.setCustomValidity('');
+                // Check input[type="date"] validations
+                // console.log("valid?", $date.get(0).checkValidity())
+                // console.log($date.get(0).validationMessage);
+            } else {
+                self.setCustomValidity("Por favor elija una fecha válida");
+                self.reportValidity();
+            }
+        }
+    }, 100)
+})
+
 var FIRST_DELIVERY_DATE_PICKER = FIELDS.FIRST_DELIVERY_DATE.data('datepicker');
 FIELDS.FIRST_DELIVERY_DATE.on('change', function(){
     if (this.validity.customError || this.checkValidity() ){
@@ -125,83 +150,81 @@ window.app = new Vue({
     },
     methods: {
         validateForm: function(index){
-            console.log("Validating step", index);
             switch (index) {
                 case 1:
-                    var noDelivery = (this.methodSubtotal + this.productsSubtotal);
-                    console.log("noDelivery", noDelivery);
-                    if (noDelivery > 0 && noDelivery < 10.00) {
-                        this.errors[index] = "El monto total de la suscripción debe ser mayor o igual a 15 soles."
-                    } else if (noDelivery == 0) {
-                        this.errors[index] = "No tienes productos en el carrito";
-                    } else {
-                        this.errors[index] = false;
-                    };
-                    break;
+                var noDelivery = (this.methodSubtotal + this.productsSubtotal);
+                if (noDelivery > 0 && noDelivery < 10.00) {
+                    this.errors[index] = "El monto total de la suscripción debe ser mayor o igual a 15 soles."
+                } else if (noDelivery == 0) {
+                    this.errors[index] = "No tienes productos en el carrito";
+                } else {
+                    this.errors[index] = false;
+                };
+                break;
                 case 2:
-                    var error;
-                    var inputs = [
-                        FIELDS.DOCUMENT_NUMBER,
-                        FIELDS.EMAIL,
-                        FIELDS.GIVEN_NAME,
-                        FIELDS.FAMILY_NAME,
-                        FIELDS.BIRTHDATE_STR,
-                        FIELDS.BIRTHDATE,
-                        FIELDS.PHONE,
-                        FIELDS.EMAIL
-                    ]
+                var error;
+                var inputs = [
+                    FIELDS.DOCUMENT_NUMBER,
+                    FIELDS.EMAIL,
+                    FIELDS.GIVEN_NAME,
+                    FIELDS.FAMILY_NAME,
+                    FIELDS.BIRTHDATE_STR,
+                    FIELDS.BIRTHDATE,
+                    FIELDS.PHONE,
+                    FIELDS.EMAIL
+                ]
 
-                    for (var i = 0; i < inputs.length; i++) {
-                        var _input = inputs[i].get(0);
+                for (var i = 0; i < inputs.length; i++) {
+                    var _input = inputs[i].get(0);
 
-                        if (!_input.checkValidity()) {
-                            error = "Por favor, ingresa correctamente todos los campos requeridos.";
-                            // _input.reportValidity()
-                            break;
-                        }
+                    if (!_input.checkValidity()) {
+                        error = "Por favor, ingresa correctamente todos los campos requeridos.";
+                        // _input.reportValidity()
+                        break;
                     }
-                    if (error){
-                        this.errors[index] = error;
-                    } else {
-                        this.errors[index] = false;
-                    }
-                    break;
+                }
+                if (error){
+                    this.errors[index] = error;
+                } else {
+                    this.errors[index] = false;
+                }
+                break;
                 case 3:
                 var error;
-                    var inputs = [
-                        FIELDS.ADDRESS,
-                        FIELDS.DISTRICT,
-                        FIELDS.FIRST_DELIVERY_DATE,
-                        FIELDS.FIRST_DELIVERY_SCHEDULE,
-                    ]
+                var inputs = [
+                    FIELDS.ADDRESS,
+                    FIELDS.DISTRICT,
+                    FIELDS.FIRST_DELIVERY_DATE,
+                    FIELDS.FIRST_DELIVERY_SCHEDULE,
+                ]
 
-                    for (var i = 0; i < inputs.length; i++) {
-                        var _input = inputs[i].get(0);
+                for (var i = 0; i < inputs.length; i++) {
+                    var _input = inputs[i].get(0);
 
-                        if (!_input.checkValidity()) {
-                            error = "Por favor, ingresa correctamente todos los campos requeridos.";
-                            // _input.reportValidity()
-                            break;
-                        }
+                    if (!_input.checkValidity()) {
+                        error = "Por favor, ingresa correctamente todos los campos requeridos.";
+                        // _input.reportValidity()
+                        break;
                     }
+                }
 
-                    if (error){
-                        this.errors[index] = error;
-                    } else {
-                        this.errors[index] = false;
-                    }
-                    break;
+                if (error){
+                    this.errors[index] = error;
+                } else {
+                    this.errors[index] = false;
+                }
+                break;
                 case 4:
-                    var selected = $('[name="medio_pago"]:checked').val()
+                var selected = $('[name="medio_pago"]:checked').val()
 
-                    if (!selected || (selected == 'kushki' && !$('#kushki_token_input').val())) {
-                        $('[name="medio_pago"]').prop('checked', false);
-                        $('.card-pago .w-radio-input').removeClass('w--redirected-checked');
-                        this.errors[index] = "Por favor, seleccione un método de pago."
-                    } else {
-                        this.errors[index] = false;
-                    }
-                    return;
+                if (!selected || (selected == 'kushki' && !$('#kushki_token_input').val())) {
+                    $('[name="medio_pago"]').prop('checked', false);
+                    $('.card-pago .w-radio-input').removeClass('w--redirected-checked');
+                    this.errors[index] = "Por favor, seleccione un método de pago."
+                } else {
+                    this.errors[index] = false;
+                }
+                return;
             }
         },
         hasErrors: function(index){ return this.getErrors(index); }, // Se mantiene por motivos de compatibilidad
@@ -221,35 +244,33 @@ window.app = new Vue({
         updateCart: function(productData, event){
             var quantity = parseInt(event.target.value);
             if ( Number.isInteger(quantity) ) {
-                console.log("Quantity updated ("+ quantity + ") for product " + productData.slug);
                 var cartItemIndex = this.subscription.products.findIndex(
-                function(product){ return product.slug == productData.slug});
-                if (cartItemIndex < 0) {
-                    this.subscription.products.push({
-                        slug: productData.slug,
-                        title: productData.title,
-                        price: productData.price,
-                        brand: productData.brand,
-                        lab: productData.lab,
-                        presentation: productData.presentation,
-                        image: productData.image,
-                        quantity: quantity,
-                        _type: productData._type,
-                    })
-                } else {
-                    // cartItem.price : productData.price;
-                    if (quantity < 1) {
-                        this.subscription.products.splice(cartItemIndex, 1);
+                    function(product){ return product.slug == productData.slug});
+                    if (cartItemIndex < 0) {
+                        this.subscription.products.push({
+                            slug: productData.slug,
+                            title: productData.title,
+                            price: productData.price,
+                            brand: productData.brand,
+                            lab: productData.lab,
+                            presentation: productData.presentation,
+                            image: productData.image,
+                            quantity: quantity,
+                            _type: productData._type,
+                        })
                     } else {
-                        this.subscription.products[cartItemIndex].quantity = quantity;
+                        // cartItem.price : productData.price;
+                        if (quantity < 1) {
+                            this.subscription.products.splice(cartItemIndex, 1);
+                        } else {
+                            this.subscription.products[cartItemIndex].quantity = quantity;
+                        }
                     }
+                    document.getElementById('input_qty_' + productData.slug).value = quantity;
+                } else {
+                    console.error("Not a valid quantity");
                 }
-                console.log('input_qty_' + productData.slug);
-                document.getElementById('input_qty_' + productData.slug).value = quantity;
-            } else {
-                console.error("Not a valid quantity");
+                this.validateForm(1);
             }
-            this.validateForm(1);
         }
-    }
-})
+    })
