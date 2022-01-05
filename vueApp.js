@@ -53,11 +53,12 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
             self.reportValidity();
         } else {
             var date_parts = self.value.split("/");
-            var day = date_parts[0], month = parseInt(date_parts[1]) - 1, year = date_parts[2];
-            var date_str = new Date(year, month, day);
-            console.log("date_str", date_str)
-            var date = FIELDS.BIRTHDATE.get(0).valueAsDate;
-            if (date == date_str){
+            var date_obj_parts = FIELDS.BIRTHDATE.get(0).value.split("-").reverse();
+
+            console.log("date_parts", date_parts);
+            console.log("date_obj_parts", date_obj_parts);
+
+            if (date_parts == date_obj_parts){
                 self.setCustomValidity('');
                 // Check input[type="date"] validations
                 // console.log("valid?", $date.get(0).checkValidity())
