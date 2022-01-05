@@ -44,6 +44,7 @@ FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
 
 FIELDS.BIRTHDATE_STR.on('change', function(){
     var self = this;
+    console.log('change', self.value);
     setTimeout(function(){
         if (self.value == '00/00/0000'){
             self.value == '';
