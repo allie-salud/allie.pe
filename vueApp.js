@@ -44,7 +44,6 @@ FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
 
 FIELDS.BIRTHDATE_STR.on('change blur', function(){
     var self = this;
-    console.log('change', self.value);
     setTimeout(function(){
         if (self.value == '00/00/0000'){
             self.value = '';
@@ -69,11 +68,15 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
             }
         }
     }, 10)
+});
+
+FIELDS.FIRST_DELIVERY_DATE.on('keydown', function(){
+    return false;
 })
 
 var FIRST_DELIVERY_DATE_PICKER = FIELDS.FIRST_DELIVERY_DATE.data('datepicker');
 FIELDS.FIRST_DELIVERY_DATE.on('change', function(){
-    if (this.validity.customError || this.checkValidity() ){
+    if (this.value && this.validity.customError || this.checkValidity() ){
         var dateParts = this.value.split("/");
         console.log("delivery_dateParts", dateParts);
         var date = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, dateParts[0])
