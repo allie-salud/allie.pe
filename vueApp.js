@@ -188,11 +188,11 @@ window.app = new Vue({
 
                     if (!_input.checkValidity()) {
                         error = "Por favor, ingresa correctamente todos los campos requeridos.";
-                        inputs[i].closest('.form-input-group, .form-input-field').addClass('invalid');
+                        inputs[i].closest('.form-input-group, .form-input-field, .form-input-wrapper').addClass('invalid');
                         // _input.reportValidity()
                         // break;
                     } else {
-                        inputs[i].closest('.form-input-group, .form-input-field').removeClass('invalid');
+                        inputs[i].closest('.form-input-group, .form-input-field, .form-input-wrapper').removeClass('invalid');
                     }
                 }
                 if (error){
@@ -216,10 +216,10 @@ window.app = new Vue({
 
                     if (!_input.checkValidity()) {
                         error = "Por favor, ingresa correctamente todos los campos requeridos.";
-                        inputs[i].closest('.form-input-group, .form-input-field').addClass('invalid');
+                        inputs[i].closest('.form-input-group, .form-input-field, .form-input-wrapper').addClass('invalid');
                         // _input.reportValidity()
                     } else {
-                        inputs[i].closest('.form-input-group, .form-input-field').removeClass('invalid');
+                        inputs[i].closest('.form-input-group, .form-input-field, .form-input-wrapper').removeClass('invalid');
                     }
                 }
 
