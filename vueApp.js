@@ -191,7 +191,7 @@ window.app = new Vue({
                     // console.dir(errorData);
                     self.invalidCoupon = true;
                 },
-                always: function(){
+                complete: function(){
                     self.loadingCoupon = false;
                     APPLY_COUPON_BUTTON.text('Aplicar')
                     APPLY_COUPON_BUTTON.removeClass('disabled');
