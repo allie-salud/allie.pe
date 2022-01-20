@@ -152,9 +152,10 @@ window.app = new Vue({
         firstDeliveryTotal: function(){
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
-            if (this.conditions.maximumDiscountValue){
-                discountValue = Math.min(discountValue, this.conditions.maximumDiscountValue);
+            if (this.coupon.conditions.maximumDiscountValue){
+                discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue);
             }
+            console.log("FDT:", this.subscriptionTotal - discountValue)
             return this.subscriptionTotal - discountValue;
         },
         subDetails: function() {
