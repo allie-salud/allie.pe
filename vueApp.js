@@ -1,3 +1,5 @@
+var PROMO_CODE_API_ENDPOINT = "https://allie-promo-codes.pytel.workers.dev/";
+
 var FIELDS = {
     DOCUMENT_TYPE: $('#documento_tipo'),
     DOCUMENT_NUMBER: $('#documento_numero'),
@@ -12,6 +14,7 @@ var FIELDS = {
     DISTRICT: $('#distrito'),
     FIRST_DELIVERY_DATE: $('#subscription_startdate'),
     FIRST_DELIVERY_SCHEDULE: $("#horario_entrega"),
+    COUPON_CODE: $('#coupon_code'),
 }
 
 var NUMERIC_INPUTS = [
@@ -158,6 +161,18 @@ window.app = new Vue({
         }
     },
     methods: {
+        applyCode: function(){
+            var couponEntered = FIELDS.COUPON_CODE.text();
+            $.get({
+                url: PROMO_CODE_API_ENDPOINT,
+                data: { code: couponEntered},
+                success: function(data){
+                    console.log("SUCCESS");
+                    console.log(data);
+                    // FIELDS.COUPON_CODE.text()
+                }
+            })
+        },
         validateForm: function(index){
             switch (index) {
                 case 1:
