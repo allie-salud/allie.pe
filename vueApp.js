@@ -151,7 +151,7 @@ window.app = new Vue({
         },
         firstDeliveryTotal: function(){
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
-            var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * this.ticketValueForDiscounts;
+            var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
             if (this.conditions.maximumDiscountValue){
                 discountValue = Math.min(discountValue, this.conditions.maximumDiscountValue);
             }
