@@ -119,6 +119,7 @@ Vue.filter('toJsonString', function(object) { return JSON.stringify(object); });
 window.app = new Vue({
     el: '#subscribe-form',
     data: {
+        couponApplied: false,
         errors: {
             1: null,
             2: null,
