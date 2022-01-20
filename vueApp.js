@@ -17,8 +17,6 @@ var FIELDS = {
     COUPON_CODE: $('#coupon_code'),
 }
 
-var APPLY_COUPON_BUTTON = $('#couponApply');
-
 var NUMERIC_INPUTS = [
     FIELDS.DOCUMENT_NUMBER,
     FIELDS.PHONE
@@ -169,6 +167,7 @@ window.app = new Vue({
     },
     methods: {
         applyCode: function(){
+            var APPLY_COUPON_BUTTON = $('#couponApply');
             if (APPLY_COUPON_BUTTON.hasClass('disabled')) return;
             var self = this;
             var couponEntered = FIELDS.COUPON_CODE.val();
