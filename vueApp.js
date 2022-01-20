@@ -162,7 +162,7 @@ window.app = new Vue({
     },
     methods: {
         applyCode: function(){
-            var couponEntered = FIELDS.COUPON_CODE.value();
+            var couponEntered = FIELDS.COUPON_CODE.val();
             $.ajax({
                 url: PROMO_CODE_API_ENDPOINT,
                 type: 'GET',
