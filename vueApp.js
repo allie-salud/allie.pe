@@ -174,6 +174,7 @@ window.app = new Vue({
             var couponEntered = FIELDS.COUPON_CODE.val();
             self.loadingCoupon = true;
             APPLY_COUPON_BUTTON.text('⏳');
+            APPLY_COUPON_BUTTON.addClass('disabled');
 
             $.ajax({
                 url: PROMO_CODE_API_ENDPOINT,
@@ -193,10 +194,11 @@ window.app = new Vue({
                 always: function(){
                     self.loadingCoupon = false;
                     APPLY_COUPON_BUTTON.text('Aplicar')
+                    APPLY_COUPON_BUTTON.removeClass('disabled');
                 }
             });
         },
-        removeCoupon: function(index){
+        removeCoupon: function(){
             FIELDS.COUPON_CODE.val('');
             this.coupon = null;
         },
