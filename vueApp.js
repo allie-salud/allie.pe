@@ -155,7 +155,7 @@ window.app = new Vue({
             if (this.coupon.conditions.maximumDiscountValue){
                 discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue);
             }
-            console.log("FDT:", this.subscriptionTotal - discountValue)
+            console.log("DV:", discountValue)
             return this.subscriptionTotal - discountValue;
         },
         subDetails: function() {
