@@ -162,14 +162,18 @@ window.app = new Vue({
     },
     methods: {
         applyCode: function(){
-            var couponEntered = FIELDS.COUPON_CODE.text();
-            $.get({
+            var couponEntered = FIELDS.COUPON_CODE.value();
+            $.ajax({
                 url: PROMO_CODE_API_ENDPOINT,
+                type: 'GET',
                 data: { code: couponEntered},
                 success: function(data){
                     console.log("SUCCESS");
                     console.log(data);
                     // FIELDS.COUPON_CODE.text()
+                },
+                error: function(errorData){
+                    console.dir(errorData);
                 }
             })
         },
