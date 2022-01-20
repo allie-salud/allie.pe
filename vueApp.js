@@ -17,6 +17,8 @@ var FIELDS = {
     COUPON_CODE: $('#coupon_code'),
 }
 
+var APPLY_COUPON_BUTTON = $('#couponApply');
+
 var NUMERIC_INPUTS = [
     FIELDS.DOCUMENT_NUMBER,
     FIELDS.PHONE
@@ -122,7 +124,9 @@ Vue.filter('toJsonString', function(object) { return JSON.stringify(object); });
 window.app = new Vue({
     el: '#subscribe-form',
     data: {
-        couponApplied: false,
+        invalidCoupon: false,
+        loadingCoupon: false,
+        coupon: null,
         errors: {
             1: null,
             2: null,
@@ -137,6 +141,9 @@ window.app = new Vue({
         cardSet: false
     },
     computed: {
+        couponApplied: function(){
+            return (this.coupon && this.coupon.code) ? this.coupon.code : false;
+        },
         cartWithProducts: function(){},
         methodSubtotal: function(){ return this.subscription.method.price || 0 },
         productsSubtotal: function(){ return this.subscription.products.reduce(function (sum, product){ return sum + product.price * product.quantity }, 0); },
@@ -162,20 +169,36 @@ window.app = new Vue({
     },
     methods: {
         applyCode: function(){
+            if (APPLY_COUPON_BUTTON.hasClass('disabled')) return;
+            var self = this;
             var couponEntered = FIELDS.COUPON_CODE.val();
+            self.loadingCoupon = true;
+            APPLY_COUPON_BUTTON.text('⏳');
+
             $.ajax({
                 url: PROMO_CODE_API_ENDPOINT,
                 type: 'GET',
                 data: { code: couponEntered},
                 success: function(data){
-                    console.log("SUCCESS");
-                    console.log(data);
-                    // FIELDS.COUPON_CODE.text()
+                    self.coupon = data.results[0];
+                    if (self.coupon.code){
+                        FIELDS.COUPON_CODE.val(self.coupon.code);
+                        self.invalidCoupon = false;
+                    }
                 },
                 error: function(errorData){
-                    console.dir(errorData);
+                    // console.dir(errorData);
+                    self.invalidCoupon = true;
+                },
+                always: function(){
+                    self.loadingCoupon = false;
+                    APPLY_COUPON_BUTTON.text('Aplicar')
                 }
-            })
+            });
+        },
+        removeCoupon: function(index){
+            FIELDS.COUPON_CODE.val('');
+            this.coupon = null;
         },
         validateForm: function(index){
             switch (index) {
