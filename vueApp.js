@@ -177,6 +177,7 @@ window.app = new Vue({
     methods: {
         applyCode: function(){
             FIELDS.COUPON_CODE = $('#coupon_code');
+
             var APPLY_COUPON_BUTTON = $('#couponApply');
             if (APPLY_COUPON_BUTTON.hasClass('disabled')) return;
             var self = this;
