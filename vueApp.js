@@ -151,9 +151,14 @@ window.app = new Vue({
         },
         firstDeliveryTotal: function(){
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
+
+            if (this.coupon.conditions.appliesToDelivery){
+                ticketValueForDiscounts += appliesToDelivery;
+            }
+
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
             if (this.coupon.conditions.maximumDiscountValue){
-                discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue);
+                discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue, ticketValueForDiscounts);
             }
             console.log("DV:", discountValue)
             return this.subscriptionTotal - discountValue;
