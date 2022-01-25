@@ -153,7 +153,7 @@ window.app = new Vue({
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
 
             if (this.coupon.conditions.appliesToDelivery){
-                ticketValueForDiscounts += appliesToDelivery;
+                ticketValueForDiscounts += this.deliverySubtotal;
             }
 
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
