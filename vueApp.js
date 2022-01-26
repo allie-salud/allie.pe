@@ -163,6 +163,9 @@ window.app = new Vue({
 
             return this.subscriptionTotal - discountValue;
         },
+        discountValue: function(){
+            return this.subscriptionTotal - this.firstDeliveryTotal;
+        },
         subDetails: function() {
             return {
                 method: {
