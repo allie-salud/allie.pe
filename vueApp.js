@@ -119,7 +119,7 @@ Vue.filter('currencyValue', function (value) {
     return _round2(value).toFixed(2);
 })
 Vue.filter('percentageString', function (value) {
-    return _round2(value*100).toFixed(2);
+    return _round2(value*100).toFixed(2) + "%";
 })
 Vue.filter('toJsonString', function(object) { return JSON.stringify(object); });
 window.app = new Vue({
