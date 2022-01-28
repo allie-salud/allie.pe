@@ -31,8 +31,8 @@ FIELDS.DOCUMENT_TYPE.on('change', function(){
         FIELDS.DOCUMENT_NUMBER.attr('minlength', 8)
         FIELDS.DOCUMENT_NUMBER.attr('maxlength', 8)
     } else {
-        FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9]{12}')
-        FIELDS.DOCUMENT_NUMBER.attr('minlength', 12)
+        FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9a-zA-Z]{8,12}')
+        FIELDS.DOCUMENT_NUMBER.attr('minlength', 8)
         FIELDS.DOCUMENT_NUMBER.attr('maxlength', 12)
     }
 })
