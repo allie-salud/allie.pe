@@ -22,18 +22,38 @@ var NUMERIC_INPUTS = [
     FIELDS.PHONE
 ]
 
-FIELDS.DOCUMENT_NUMBER.removeAttr('role');
+var ONLY_DIGITS = function(value){
+    if (/\D/g.test(value)) {
+        value = value.replace(/\D/g,'')
+    }
+    return value
+}
+
+for (var i = 0; i < NUMERIC_INPUTS.length; i++) {
+    var _field = NUMERIC_INPUTS[i];
+    _field.on('input', function(){
+        this.value = ONLY_DIGITS(this.value);
+    })
+}
+
+// FIELDS.DOCUMENT_NUMBER.removeAttr('role');
 FIELDS.DOCUMENT_TYPE.on('change', function(){
     FIELDS.DOCUMENT_NUMBER.val("");
+    FIELDS.DOCUMENT_NUMBER.off('input');
 
     if (this.value == 'dni'){
-        FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9]{8}')
-        FIELDS.DOCUMENT_NUMBER.attr('minlength', 8)
-        FIELDS.DOCUMENT_NUMBER.attr('maxlength', 8)
+        FIELDS.DOCUMENT_NUMBER.attr('inputmode', 'numeric');
+        FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9]{8}');
+        FIELDS.DOCUMENT_NUMBER.attr('minlength', 8);
+        FIELDS.DOCUMENT_NUMBER.attr('maxlength', 8);
+        FIELDS.DOCUMENT_NUMBER.on('input', function(){
+            this.value = ONLY_DIGITS(this.value);
+        });
     } else {
-        FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9a-zA-Z]{8,12}')
-        FIELDS.DOCUMENT_NUMBER.attr('minlength', 8)
-        FIELDS.DOCUMENT_NUMBER.attr('maxlength', 12)
+        FIELDS.DOCUMENT_NUMBER.attr('inputmode', 'text');
+        FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9a-zA-Z]{8,12}');
+        FIELDS.DOCUMENT_NUMBER.attr('minlength', 8);
+        FIELDS.DOCUMENT_NUMBER.attr('maxlength', 12);
     }
 })
 
@@ -95,19 +115,7 @@ FIELDS.FIRST_DELIVERY_DATE.on('change', function(){
     }
 })
 
-var ONLY_DIGITS = function(value){
-    if (/\D/g.test(value)) {
-        value = value.replace(/\D/g,'')
-    }
-    return value
-}
 
-for (var i = 0; i < NUMERIC_INPUTS.length; i++) {
-    var _field = NUMERIC_INPUTS[i];
-    _field.on('input', function(){
-        this.value = ONLY_DIGITS(this.value);
-    })
-}
 
 function _round2(dec){
     return Math.round( (dec + Number.EPSILON) * 100 ) / 100;
