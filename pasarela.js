@@ -54,6 +54,7 @@ form.onsubmit = function(e){
 					}),
 					success: function(data){
 						if (data.subscriptionId) {
+<<<<<<< HEAD
 							window.app.setCard(
 								cardDetails.number.slice(-4),
 								cardDetails.expiryMonth + '/' + cardDetails.expiryYear);
@@ -62,6 +63,8 @@ form.onsubmit = function(e){
 							window.app.setCard.payment.expiryDate = ;
 							*/
 							tokenInput.value = response.token;
+=======
+>>>>>>> d81f6b4 (Test new endpoint)
 							// alert("¡Perfecto! Hemos registrado tu tarjeta con éxito");
 							document.getElementById('form-cc-container').style.display = 'none';
 							$('input[name="medio_pago"][value="kushki"]').prop("checked", true);
