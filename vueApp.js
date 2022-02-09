@@ -9,10 +9,12 @@ var FIELDS = {
     BIRTHDATE_STR: $("#birthdatestr"),
     BIRTHDATE: $('#birthdate'),
     PHONE: $("#phone"),
+    COUNTRY_CODE: $("#id_numero_codigo_area"),
     EMAIL: $("#email"),
     ADDRESS: $('#direccion'),
     DISTRICT: $('#distrito'),
-    FIRST_DELIVERY_DATE: $('#subscription_startdate'),
+    FIRST_DELIVERY_DATE_STR: $('#subscription_startdate'),
+    FIRST_DELIVERY_DATE: $('id_fecha_entrega'),
     FIRST_DELIVERY_SCHEDULE: $("#horario_entrega"),
     COUPON_CODE: $('#coupon_code'),
 }
@@ -93,12 +95,12 @@ FIELDS.BIRTHDATE_STR.on('change blur', function(){
     }, 10)
 });
 
-FIELDS.FIRST_DELIVERY_DATE.on('keydown', function(){
+FIELDS.FIRST_DELIVERY_DATE_STR.on('keydown', function(){
     return false;
 })
 
-var FIRST_DELIVERY_DATE_PICKER = FIELDS.FIRST_DELIVERY_DATE.data('datepicker');
-FIELDS.FIRST_DELIVERY_DATE.on('change', function(){
+var FIRST_DELIVERY_DATE_PICKER = FIELDS.FIRST_DELIVERY_DATE_STR.data('datepicker');
+FIELDS.FIRST_DELIVERY_DATE_STR.on('change', function(){
     if (this.value && this.validity.customError || this.checkValidity() ){
         var dateParts = this.value.split("/");
         console.log("delivery_dateParts", dateParts);
@@ -309,6 +311,9 @@ window.app = new Vue({
                     $('.card-pago .w-radio-input').removeClass('w--redirected-checked');
                     this.errors[index] = "Por favor, seleccione un método de pago."
                 } else {
+                    if ( selected == 'kushki') {
+                        $('.subscription-payment-automatic .card-pago .w-radio-input').addClass('w--redirected-checked');
+                    }
                     this.errors[index] = false;
                 }
                 return;
