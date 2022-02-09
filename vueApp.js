@@ -328,6 +328,10 @@ window.app = new Vue({
             this.payment.expiryDate = expiryDate;
             this.cardSet = true;
         },
+        unsetCard: function(){
+            this.payment = {};
+            this.cardSet = false;
+        },
         updateCart: function(productData, event){
             var quantity = parseInt(event.target.value);
             if ( Number.isInteger(quantity) ) {
