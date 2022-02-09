@@ -280,7 +280,7 @@ window.app = new Vue({
                 var inputs = [
                     FIELDS.ADDRESS,
                     FIELDS.DISTRICT,
-                    FIELDS.FIRST_DELIVERY_DATE,
+                    FIELDS.FIRST_DELIVERY_DATE_STR,
                     FIELDS.FIRST_DELIVERY_SCHEDULE,
                 ]
 
