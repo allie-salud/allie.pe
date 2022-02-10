@@ -28,5 +28,5 @@ continuePaymentMethod.onclick = function() {
   });
 };
 
-var selectedPaymentMethod = $('[name="medio_pago"]:checked').val();
-console.log(selected);
+let selectedPaymentMethod = $('[name="medio_pago"]:checked').val();
+console.log(selectedPaymentMethod);
