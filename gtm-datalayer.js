@@ -30,18 +30,27 @@ continuePaymentMethod.onclick = function() {
 
 
 let paymentMethodOptions = document.querySelectorAll('[name="medio_pago"]');
-console.log("paymentMethodOptions");
-console.log(paymentMethodOptions);
 paymentMethodOptions.forEach(function(item) {
-  console.log("paymentMethodOptions item");
-  console.log(item);
-  item.setAttribute("v-on:change", "onChangeSendDataLayer("+"medio_pago"+", $event)");
+  item.onclick = function() {
+    const paymentMethod = element.getAttribute("value");
+    let textValue = "";
+    switch (paymentMethod) {
+      case "yape":
+        textValue = "POS contra entrega";
+      case "yape":
+        textValue = "Yape";
+      case "transferencia":
+        textValue = "Transferencia";
+      case "pagolink":
+        textValue = "Pago Link / Enlace de pago";
+    }
+    window.dataLayer.push({
+        "action":{
+            "category": "Método de pago",
+            "name": "Elegir medio de pago",
+            "label": textValue
+        },
+        "event":"trackAction"
+    });
+  };
 });
-
-/*
-this.input.setAttribute("v-on:change", "updateCart("+productData+", $event)");
-
-
-let selectedPaymentMethod = $('[name="medio_pago"]:checked').val();
-console.log(selectedPaymentMethod);
-*/
