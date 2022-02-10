@@ -14,7 +14,7 @@ var FIELDS = {
     ADDRESS: $('#direccion'),
     DISTRICT: $('#distrito'),
     FIRST_DELIVERY_DATE_STR: $('#subscription_startdate'),
-    FIRST_DELIVERY_DATE: $('id_fecha_entrega'),
+    FIRST_DELIVERY_DATE: $('#id_fecha_entrega'),
     FIRST_DELIVERY_SCHEDULE: $("#horario_entrega"),
     COUPON_CODE: $('#coupon_code'),
 }
