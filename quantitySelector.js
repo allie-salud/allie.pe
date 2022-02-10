@@ -114,12 +114,12 @@ function QuantityInput(elm, startText, decreaseText, increaseText, removeText) {
             "ecommerce":{
                 "add":{
                     "products":[{
-                        "id": elm.dataset.productData.slug,
-                        "name": elm.dataset.productData.title,
-                        "price": elm.dataset.productData.price,
-                        "brand": elm.dataset.productData.brand,
-                        "category": elm.dataset.productData._type,
-                        "variant": elm.dataset.productData.presentation,
+                        "id": productData.slug,
+                        "name": productData.title,
+                        "price": productData.price,
+                        "brand": productData.brand,
+                        "category": productData._type,
+                        "variant": productData.presentation,
                         "quantity": quantity
                     }]
                 }
