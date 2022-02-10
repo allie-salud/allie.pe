@@ -1,8 +1,9 @@
 let continuePersonalData = document.getElementById("continue-personal-data");
-
-continuePersonalData.push({
-    "virtual":{
-        "page":"/datos-personales"
-    },
-    "event":"trackVirtual"
-});
+continuePersonalData.onclick = function() {
+  window.dataLayer.push({
+      "virtual":{
+          "page":"/datos-personales"
+      },
+      "event":"trackVirtual"
+  });
+};
