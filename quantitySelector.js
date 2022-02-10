@@ -110,6 +110,10 @@ function QuantityInput(elm, startText, decreaseText, increaseText, removeText) {
         this.subtract.classList.replace('delete', 'sub');
         this.subtract.innerHTML = this.decreaseText;
         }
+        console.log("dataLayer")
+        console.log(elm)
+        console.log(elm.dataset.productData)
+        console.log(" +++ dataLayer +++ ")
         window.dataLayer.push({
             "ecommerce":{
                 "add":{
