@@ -48,7 +48,9 @@ form.onsubmit = function(e){
 				$.ajax({
 					url: PAYMENT_GATEWAY_API_ENDPOINT,
 					type: 'POST',
-					data: {
+					contentType: "application/json",
+					dataType: "json",
+					data: JSON.stringify({
 						"token": response.token,
 						"startDate": FIELDS.FIRST_DELIVERY_DATE.val(),
 						"contactDetails": {
@@ -57,9 +59,9 @@ form.onsubmit = function(e){
 							"email": FIELDS.EMAIL.val(),
 							"firstName": FIELDS.GIVEN_NAME.val(),
 							"lastName": FIELDS.FAMILY_NAME.val(),
-							"phoneNumber": "+" + FIELDS.PHONE + FIELDS.COUNTRY_CODE
+							"phoneNumber": "+" + FIELDS.PHONE.val() + FIELDS.COUNTRY_CODE.val()
 						}
-					},
+					}),
 					success: function(data){
 						if (data.subscriptionId) {
 							// alert("¡Perfecto! Hemos registrado tu tarjeta con éxito");
