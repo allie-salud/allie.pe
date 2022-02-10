@@ -7,3 +7,26 @@ continuePersonalData.onclick = function() {
       "event":"trackVirtual"
   });
 };
+
+let continueSendingData = document.getElementById("continue-sending-data");
+continueSendingData.onclick = function() {
+  window.dataLayer.push({
+      "virtual":{
+          "page":"/datos-envio"
+      },
+      "event":"trackVirtual"
+  });
+};
+
+let continuePaymentMethod = document.getElementById("continue-payment-method");
+continuePaymentMethod.onclick = function() {
+  window.dataLayer.push({
+      "virtual":{
+          "page":"/metodo-pago"
+      },
+      "event":"trackVirtual"
+  });
+};
+
+var selectedPaymentMethod = $('[name="medio_pago"]:checked').val();
+console.log(selected);
