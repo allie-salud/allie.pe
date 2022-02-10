@@ -44,7 +44,7 @@ form.onsubmit = function(e){
 				*/
 				tokenInput.value = response.token;
 
-				var PAYMENT_GATEWAY_API_ENDPOINT = "https://allie-kushki.pytel.workers.dev/";
+				var PAYMENT_GATEWAY_API_ENDPOINT = "https://allie-kushki.tucita.pe/";
 				$.ajax({
 					url: PAYMENT_GATEWAY_API_ENDPOINT,
 					type: 'POST',
