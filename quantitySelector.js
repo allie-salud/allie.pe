@@ -110,6 +110,22 @@ function QuantityInput(elm, startText, decreaseText, increaseText, removeText) {
         this.subtract.classList.replace('delete', 'sub');
         this.subtract.innerHTML = this.decreaseText;
         }
+        window.dataLayer.push({
+            "ecommerce":{
+                "add":{
+                    "products":[{
+                        "id": elm.dataset.productData.slug,
+                        "name": elm.dataset.productData.title,
+                        "price": elm.dataset.productData.price,
+                        "brand": elm.dataset.productData.brand,
+                        "category": elm.dataset.productData._type,
+                        "variant": elm.dataset.productData.presentation,
+                        "quantity": quantity
+                    }]
+                }
+            },
+            "event":"addToCart"
+        });
     }
 }
 
