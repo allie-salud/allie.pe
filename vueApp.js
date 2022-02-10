@@ -384,5 +384,9 @@ window.app = new Vue({
                 }
                 this.validateForm(1);
             }
-        }
+        },
+        onChangeSendDataLayer: function(type, event){
+            console.log("type", type);
+            console.log("event", event);
+        },
     })

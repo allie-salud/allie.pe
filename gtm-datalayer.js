@@ -28,5 +28,20 @@ continuePaymentMethod.onclick = function() {
   });
 };
 
+
+let paymentMethodOptions = document.querySelectorAll('[name="medio_pago"]');
+console.log("paymentMethodOptions");
+console.log(paymentMethodOptions);
+paymentMethodOptions.forEach(function(item) {
+  console.log("paymentMethodOptions item");
+  console.log(item);
+  item.setAttribute("v-on:change", "onChangeSendDataLayer("+"medio_pago"+", $event)");
+});
+
+/*
+this.input.setAttribute("v-on:change", "updateCart("+productData+", $event)");
+
+
 let selectedPaymentMethod = $('[name="medio_pago"]:checked').val();
 console.log(selectedPaymentMethod);
+*/
