@@ -384,5 +384,24 @@ window.app = new Vue({
                 }
                 this.validateForm(1);
             }
+        },
+        onChangeMethod: function(){
+            window.dataLayer.push({
+                "ecommerce":{
+                    "add":{
+                        "products":[{
+                            "id": this.subscription.method.slug,
+                            "name": this.subscription.method.title,
+                            "price": this.subscription.method.price,
+                            "brand": this.subscription.method.lab,
+                            "category": "Anticonceptivo",
+                            "variant": this.subscription.method.presentation,
+                            "quantity": 1
+                        }]
+                    }
+                },
+                "event":"addToCart"
+            });
+            this.validateForm(1);
         }
     })
