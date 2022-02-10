@@ -35,7 +35,7 @@ paymentMethodOptions.forEach(function(item) {
     const paymentMethod = item.getAttribute("value");
     let textValue = "";
     switch (paymentMethod) {
-      case "yape":
+      case "pos":
         textValue = "POS contra entrega";
       case "yape":
         textValue = "Yape";
@@ -54,3 +54,15 @@ paymentMethodOptions.forEach(function(item) {
     });
   };
 });
+
+
+
+let recurringCardPayment = document.getElementById("recurring-card-payment");
+recurringCardPayment.onclick = function() {
+  window.dataLayer.push({
+      "virtual":{
+          "page":"/ingresar-tarjeta"
+      },
+      "event":"trackVirtual"
+  });
+};
