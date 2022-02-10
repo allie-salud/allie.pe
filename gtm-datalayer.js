@@ -32,7 +32,7 @@ continuePaymentMethod.onclick = function() {
 let paymentMethodOptions = document.querySelectorAll('[name="medio_pago"]');
 paymentMethodOptions.forEach(function(item) {
   item.onclick = function() {
-    const paymentMethod = element.getAttribute("value");
+    const paymentMethod = item.getAttribute("value");
     let textValue = "";
     switch (paymentMethod) {
       case "yape":
