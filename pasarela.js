@@ -44,7 +44,7 @@ form.onsubmit = function(e){
 				*/
 				tokenInput.value = response.token;
 
-				var PAYMENT_GATEWAY_API_ENDPOINT = "https://allie-kushki.tucita.pe/";
+				var PAYMENT_GATEWAY_API_ENDPOINT = "https://dev.payments.api.tucita.pe/";
 				$.ajax({
 					url: PAYMENT_GATEWAY_API_ENDPOINT,
 					type: 'POST',
@@ -59,7 +59,7 @@ form.onsubmit = function(e){
 							"email": FIELDS.EMAIL.val(),
 							"firstName": FIELDS.GIVEN_NAME.val(),
 							"lastName": FIELDS.FAMILY_NAME.val(),
-							"phoneNumber": "+" + FIELDS.PHONE.val() + FIELDS.COUNTRY_CODE.val()
+							"phoneNumber": "+" + FIELDS.COUNTRY_CODE.val() + FIELDS.PHONE.val()
 						}
 					}),
 					success: function(data){
