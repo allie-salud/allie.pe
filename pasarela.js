@@ -34,16 +34,6 @@ form.onsubmit = function(e){
 				var tokenInput = document.getElementById("kushki_token_input");
 				var kushkiSubscriptionIdInput = document.getElementById("kushki_subscriptionId_input");
 
-				window.app.setCard(
-					cardDetails.number.slice(-4),
-					cardDetails.expiryMonth + '/' + cardDetails.expiryYear);
-
-				/*
-				window.app.subscription.payment.type = null;
-				window.app.setCard.payment.expiryDate = ;
-				*/
-				tokenInput.value = response.token;
-
 				var PAYMENT_GATEWAY_API_ENDPOINT = "https://dev-payments-api.allie.pe/";
 				$.ajax({
 					url: PAYMENT_GATEWAY_API_ENDPOINT,
@@ -64,6 +54,14 @@ form.onsubmit = function(e){
 					}),
 					success: function(data){
 						if (data.subscriptionId) {
+							window.app.setCard(
+								cardDetails.number.slice(-4),
+								cardDetails.expiryMonth + '/' + cardDetails.expiryYear);
+							/*
+							window.app.subscription.payment.type = null;
+							window.app.setCard.payment.expiryDate = ;
+							*/
+							tokenInput.value = response.token;
 							// alert("¡Perfecto! Hemos registrado tu tarjeta con éxito");
 							document.getElementById('form-cc-container').style.display = 'none';
 							$('input[name="medio_pago"][value="kushki"]').prop("checked", true);
