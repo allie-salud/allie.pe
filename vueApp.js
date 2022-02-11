@@ -343,6 +343,22 @@ window.app = new Vue({
                 var cartItemIndex = this.subscription.products.findIndex(
                     function(product){ return product.slug == productData.slug});
                     if (cartItemIndex < 0) {
+                        window.dataLayer.push({
+                            "ecommerce":{
+                                "add":{
+                                    "products":[{
+                                        "id": productData.slug,
+                                        "name": productData.title,
+                                        "price": productData.price,
+                                        "brand": productData.brand,
+                                        "category": productData._type,
+                                        "variant": productData.presentation,
+                                        "quantity": quantity
+                                    }]
+                                }
+                            },
+                            "event":"addToCart"
+                        });
                         this.subscription.products.push({
                             slug: productData.slug,
                             title: productData.title,
@@ -367,6 +383,25 @@ window.app = new Vue({
                     console.error("Not a valid quantity");
                 }
                 this.validateForm(1);
+            },
+            onChangeMethod: function(){
+                window.dataLayer.push({
+                    "ecommerce":{
+                        "add":{
+                            "products":[{
+                                "id": this.subscription.method.slug,
+                                "name": this.subscription.method.title,
+                                "price": this.subscription.method.price,
+                                "brand": this.subscription.method.lab,
+                                "category": "Anticonceptivo",
+                                "variant": this.subscription.method.presentation,
+                                "quantity": 1
+                            }]
+                        }
+                    },
+                    "event":"addToCart"
+                });
+                this.validateForm(1);
             }
-        }
+        },
     })
