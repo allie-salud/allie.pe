@@ -72,11 +72,14 @@ form.onsubmit = function(e){
 							form.reset();
 						}
 					},
-					error: function(errorData){
-						console.log(errorData.message || JSON.stringify(errorData, null, 2))
+					error: function(response){
+						var errorData = response.responseJSON;
+						console.log(JSON.stringify(errorData, null, 2));
+						alert(errorData.message || JSON.stringify(errorData))
 					},
 					complete: function(){
-
+						submitButton.removeAttribute("disabled");
+						submitButton.value = submitButton.dataset.label;
 					}
 				});
 
@@ -85,8 +88,7 @@ form.onsubmit = function(e){
 				alert(response.message);
 				console.error('Error: ', response.error, 'Code: ', response.code, 'Message: ', response.message);
 			}
-			submitButton.removeAttribute("disabled");
-			submitButton.value = submitButton.dataset.label;
+
 		}
 	);
 };
