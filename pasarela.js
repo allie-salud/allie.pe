@@ -44,7 +44,7 @@ form.onsubmit = function(e){
 				*/
 				tokenInput.value = response.token;
 
-				var PAYMENT_GATEWAY_API_ENDPOINT = "https://dev.payments.api.allie.pe/";
+				var PAYMENT_GATEWAY_API_ENDPOINT = "https://dev-payments-api.allie.pe/";
 				$.ajax({
 					url: PAYMENT_GATEWAY_API_ENDPOINT,
 					type: 'POST',
