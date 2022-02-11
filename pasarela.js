@@ -85,6 +85,8 @@ form.onsubmit = function(e){
 			} else {
 				alert(response.message);
 				console.error('Error: ', response.error, 'Code: ', response.code, 'Message: ', response.message);
+				submitButton.removeAttribute("disabled");
+				submitButton.value = submitButton.dataset.label;
 			}
 
 		}
