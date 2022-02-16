@@ -342,23 +342,23 @@ window.app = new Vue({
             if ( Number.isInteger(quantity) ) {
                 var cartItemIndex = this.subscription.products.findIndex(
                     function(product){ return product.slug == productData.slug});
+                    window.dataLayer.push({
+                        "ecommerce":{
+                            "add":{
+                                "products":[{
+                                    "id": productData.slug,
+                                    "name": productData.title,
+                                    "price": productData.price,
+                                    "brand": productData.brand,
+                                    "category": productData._type,
+                                    "variant": productData.presentation,
+                                    "quantity": quantity
+                                }]
+                            }
+                        },
+                        "event":"addToCart"
+                    });
                     if (cartItemIndex < 0) {
-                        window.dataLayer.push({
-                            "ecommerce":{
-                                "add":{
-                                    "products":[{
-                                        "id": productData.slug,
-                                        "name": productData.title,
-                                        "price": productData.price,
-                                        "brand": productData.brand,
-                                        "category": productData._type,
-                                        "variant": productData.presentation,
-                                        "quantity": quantity
-                                    }]
-                                }
-                            },
-                            "event":"addToCart"
-                        });
                         this.subscription.products.push({
                             slug: productData.slug,
                             title: productData.title,

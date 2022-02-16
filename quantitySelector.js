@@ -110,26 +110,6 @@ function QuantityInput(elm, startText, decreaseText, increaseText, removeText) {
         this.subtract.classList.replace('delete', 'sub');
         this.subtract.innerHTML = this.decreaseText;
         }
-        console.log("dataLayer")
-        console.log(elm)
-        console.log(elm.dataset.productData)
-        console.log(" +++ dataLayer +++ ")
-        window.dataLayer.push({
-            "ecommerce":{
-                "add":{
-                    "products":[{
-                        "id": productData.slug,
-                        "name": productData.title,
-                        "price": productData.price,
-                        "brand": productData.brand,
-                        "category": productData._type,
-                        "variant": productData.presentation,
-                        "quantity": quantity
-                    }]
-                }
-            },
-            "event":"addToCart"
-        });
     }
 }
 
