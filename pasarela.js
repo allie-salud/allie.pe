@@ -64,6 +64,7 @@ form.onsubmit = function(e){
 					}),
 					success: function(data){
 						if (data.subscriptionId) {
+							console.log(data);
 							// alert("¡Perfecto! Hemos registrado tu tarjeta con éxito");
 							document.getElementById('form-cc-container').style.display = 'none';
 							$('input[name="medio_pago"][value="kushki"]').prop("checked", true);
