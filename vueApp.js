@@ -416,7 +416,7 @@ window.app = new Vue({
                         "price": product.price,
                         "brand": product.brand,
                         "category": product._type,
-                        "variant": productData.presentation,
+                        "variant": product.presentation,
                         "quantity": product.quantity
                     }
                 })
