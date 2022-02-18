@@ -408,7 +408,7 @@ window.app = new Vue({
                 let idSubscription = document.getElementById("kushki_subscriptionId_input")
                 console.log("idSubscription", idSubscription.value);
                 let revenue = document.getElementsByClassName("totalamountvalue")
-                console.log("revenue", revenue[0].value);
+                console.log("revenue", revenue[0].innerText);
                 let productsDataLayer = this.subscription.products.map(function(product){
                     return {
                         id: product.slug,
@@ -420,6 +420,7 @@ window.app = new Vue({
                     }
                 })
                 console.log("productsDataLayer", productsDataLayer);
+                console.log(productsDataLayer);
                 window.dataLayer.push({
                     "ecommerce":{
                         "purchase":{
