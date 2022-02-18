@@ -405,6 +405,36 @@ window.app = new Vue({
             },
             onClickSubscription: function(){
                 console.log("Te acabas de subscribir");
+                let idSubscription = document.getElementById("kushki_subscriptionId_input")
+                console.log("idSubscription", idSubscription.value);
+                let revenue = document.getElementsByClassName("totalamountvalue")
+                console.log("revenue", revenue[0].value);
+                let productsDataLayer = this.subscription.products.map(function(product){
+                    return {
+                        id: product.slug,
+                        name: product.title,
+                        price: product.price,
+                        brand: product.brand,
+                        category: product._type,
+                        quantity: product.quantity
+                    }
+                })
+                console.log("productsDataLayer", productsDataLayer);
+                window.dataLayer.push({
+                    "ecommerce":{
+                        "purchase":{
+                            "actionField":{
+                                "id": idSubscription.value,
+                                "affiliation": "Allie",
+                                "revenue": revenue[0].value,
+                                "tax": revenue[0].value*0.18,
+                                "shipping": this.deliverySubtotal
+                            },
+                            "products": productsDataLayer
+                        }
+                    },
+                    "event":"orderPurchase"
+                });
             }
         },
     })
