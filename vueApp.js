@@ -411,12 +411,13 @@ window.app = new Vue({
                 revenueDataLayer = parseInt(revenue[0].innerText)
                 let productsDataLayer = this.subscription.products.map(function(product){
                     return {
-                        id: product.slug,
-                        name: product.title,
-                        price: product.price,
-                        brand: product.brand,
-                        category: product._type,
-                        quantity: product.quantity
+                        "id": product.slug,
+                        "name": product.title,
+                        "price": product.price,
+                        "brand": product.brand,
+                        "category": product._type,
+                        "variant": productData.presentation,
+                        "quantity": product.quantity
                     }
                 })
                 productsDataLayer.push({
