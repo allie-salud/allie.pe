@@ -403,7 +403,7 @@ window.app = new Vue({
                 });
                 this.validateForm(1);
             },
-            onClickSubscription: function(event){
+            onClickSubscription: function(){
                 console.log("Te acabas de subscribir");
             }
         },
