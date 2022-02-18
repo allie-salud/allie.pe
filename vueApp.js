@@ -408,7 +408,7 @@ window.app = new Vue({
                 let idSubscription = document.getElementById("kushki_subscriptionId_input")
                 idSubscription = idSubscription.value
                 let revenueDataLayer = document.getElementsByClassName("totalamountvalue")
-                revenueDataLayer = parseInt(revenue[0].innerText)
+                revenueDataLayer = parseInt(revenueDataLayer[0].innerText)
                 let productsDataLayer = this.subscription.products.map(function(product){
                     return {
                         "id": product.slug,
