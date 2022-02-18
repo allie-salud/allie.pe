@@ -419,6 +419,15 @@ window.app = new Vue({
                         quantity: product.quantity
                     }
                 })
+                productsDataLayer.push({
+                    "id": this.subscription.method.slug,
+                    "name": this.subscription.method.title,
+                    "price": this.subscription.method.price,
+                    "brand": this.subscription.method.lab,
+                    "category": "Anticonceptivo",
+                    "variant": this.subscription.method.presentation,
+                    "quantity": 1
+                })
                 window.dataLayer.push({
                     "ecommerce":{
                         "purchase":{
