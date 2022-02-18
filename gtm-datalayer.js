@@ -66,3 +66,6 @@ recurringCardPayment.onclick = function() {
       "event":"trackVirtual"
   });
 };
+
+let buttonSubscription = document.getElementById("button-subscription");
+buttonSubscription.setAttribute("v-on:click", "onClickSubscription($event)");

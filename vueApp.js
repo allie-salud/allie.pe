@@ -402,6 +402,9 @@ window.app = new Vue({
                     "event":"addToCart"
                 });
                 this.validateForm(1);
+            },
+            onClickSubscription: function(event){
+                console.log("Te acabas de subscribir");
             }
         },
     })
