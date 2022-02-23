@@ -3,7 +3,7 @@ const isEmpty = str => !str.trim().length;
 let inputNumberCard = document.getElementById("number");
 let labelValidateCard = document.getElementById("number-validate");
 
-export function validateForm(form) {
+function validateForm(form) {
   let isValidateCard = validateCard(form);
   if(!isValidateCard){
     return false;

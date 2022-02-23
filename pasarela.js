@@ -5,7 +5,7 @@ var kushki = new Kushki({
   inTestEnvironment: true,
 });
 
-export function subscriptionToken(cardDetails = {}){
+function subscriptionToken(cardDetails = {}){
   kushki.requestSubscriptionToken(
     {
       currency: "PEN",

@@ -1,6 +1,3 @@
-import { subscriptionToken } from "./pasarela";
-import { validateForm } from "./validate-form-card";
-
 let inputNumberCard = document.getElementById("number");
 inputNumberCard.setAttribute(
   "oninput",
