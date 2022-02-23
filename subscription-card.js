@@ -7,6 +7,7 @@ inputNumberCard.setAttribute(
 var form = document.getElementById("form-cc");
 
 form.onsubmit = function(e){
+  console.log("onsubmit");
   e.preventDefault();
   e.stopPropagation();
   window.app.unsetCard();
