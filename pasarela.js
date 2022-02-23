@@ -54,6 +54,7 @@ form.onsubmit = function(e){
 					}),
 					success: function(data){
 						if (data.subscriptionId) {
+							console.log(data);
 							window.app.setCard(
 								cardDetails.number.slice(-4),
 								cardDetails.expiryMonth + '/' + cardDetails.expiryYear);
