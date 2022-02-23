@@ -1,6 +1,5 @@
 
 const isEmpty = str => !str.trim().length;
-let inputNumberCard = document.getElementById("number");
 let labelValidateCard = document.getElementById("number-validate");
 
 function validateForm(form) {
