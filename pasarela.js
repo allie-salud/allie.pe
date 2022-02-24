@@ -6,6 +6,7 @@ var kushki = new Kushki({
 });
 
 function subscriptionToken(cardDetails = {}){
+  console.log("subscriptionToken");
   kushki.requestSubscriptionToken(
     {
       currency: "PEN",
@@ -49,6 +50,8 @@ function subscriptionToken(cardDetails = {}){
             }
           },
           error: function(response){
+           console.log("error");
+           console.log(response);
             var errorData = response.responseJSON;
             alert(errorData.message || JSON.stringify(errorData))
           },
