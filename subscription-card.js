@@ -57,7 +57,7 @@ form.onsubmit = function(e){
       expiryMonth: form.expiry_month.value,
       expiryYear: form.expiry_year.value,
     };
-
+    console.log("isValidate subscriptionToken");
     subscriptionToken(cardDetails);
   }else{
     submitButton.removeAttribute("disabled");
