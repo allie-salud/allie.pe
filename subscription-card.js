@@ -1,27 +1,42 @@
-String.prototype.toCardFormat = function () {
-    return this.replace(/[^0-9]/g, "").substr(0, 16).split("").reduce(cardFormat, "");
-    function cardFormat(str, l, i) {
-        return str + ((!i || (i % 4)) ? "" : " ") + l;
-    }
-};
+let inputNumberCard = document.getElementById("number");
+inputNumberCard.oninput = function() {
+  this.value = cc_format(this.value)
+}
+inputNumberCard.setAttribute(
+  "onkeypress",
+  "return checkDigit(event)"
+);
 
 let inputCVV= document.getElementById("cvv");
-let inputNumberCard = document.getElementById("number");
-inputNumberCard.setAttribute(
-  "oninput",
-  "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-);
 inputCVV.setAttribute(
-  "oninput",
-  "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+  "onkeypress",
+  "return checkDigit(event)"
 );
 
-$(document).ready(function(){
-  //inputNumberCard toCardFormat
-  $("#number").keyup(function () {
-    $(this).val($(this).val().toCardFormat());
-  });
-});
+function checkDigit(event) {
+    var code = (event.which) ? event.which : event.keyCode;
+
+    if ((code < 48 || code > 57) && (code > 31)) {
+        return false;
+    }
+
+    return true;
+}
+
+function cc_format(value) {
+  var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+  var matches = v.match(/\d{4,16}/g);
+  var match = matches && matches[0] || ''
+  var parts = []
+  for (i=0, len=match.length; i<len; i+=4) {
+    parts.push(match.substring(i, i+4))
+  }
+  if (parts.length) {
+    return parts.join(' ')
+  } else {
+    return value
+  }
+}
 
 var form = document.getElementById("form-cc");
 

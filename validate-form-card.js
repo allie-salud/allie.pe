@@ -33,6 +33,7 @@ function validateCVV(form){
     labelValidateCVV.innerHTML = "El código de seguridad es obligatorio";
     inputCVV.classList.add("is-invalid");
     labelValidateCVV.style.display = "block";
+    return false;
   }
   if(form.cvv.value.length < 3){
     labelValidateCVV.innerHTML = "Tu CVV debe tener entre 3 o 4 dígitos";
