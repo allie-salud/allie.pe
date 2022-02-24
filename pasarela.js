@@ -7,6 +7,7 @@ var kushki = new Kushki({
 
 function subscriptionToken(cardDetails = {}){
   console.log("subscriptionToken");
+  let submitButton = document.getElementById('cc-form-submit-btn');
   kushki.requestSubscriptionToken(
     {
       currency: "PEN",
