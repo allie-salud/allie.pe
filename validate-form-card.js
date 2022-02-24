@@ -55,6 +55,7 @@ function validateCard(form){
     labelValidateCard.style.display = "block";
     return false;
   }
+  return true;
 }
 
 function validateCVV(form){
@@ -70,6 +71,7 @@ function validateCVV(form){
     labelValidateCVV.style.display = "block";
     return false;
   }
+  return true;
 }
 
 function validateExpiryMonthAndYear(form){
@@ -96,6 +98,7 @@ function validateExpiryMonthAndYear(form){
       return false;
     }
   }
+  return true;
 }
 
 
@@ -106,4 +109,5 @@ function validateName(form){
     labelValidateName.style.display = "block";
     return false;
   }
+  return true;
 }
