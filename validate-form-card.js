@@ -16,6 +16,10 @@ function validateForm(form) {
   let isValidateCVV = validateCVV(form);
   let isValidateExpiryMonthAndYear = validateExpiryMonthAndYear(form);
   let isValidateName = validateName(form);
+  console.log("isValidateCard => ", isValidateCard);
+  console.log("isValidateCVV => ", isValidateCVV);
+  console.log("isValidateExpiryMonthAndYear => ", isValidateCard);
+  console.log("isValidateName => ", isValidateName);
   if(!isValidateCard || !isValidateCVV || !isValidateExpiryMonthAndYear || !isValidateName){
     if(isValidateCard){
       labelValidateCard.style.display = "none";

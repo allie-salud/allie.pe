@@ -49,6 +49,7 @@ form.onsubmit = function(e){
   submitButton.dataset.label = submitButton.value;
   submitButton.value = submitButton.dataset.wait;
   let isValidate = validateForm(form);
+  console.log("isValidate => ", isValidate);
   if(isValidate){
     let cardDetails = {
       name: form.name.value,
