@@ -17,9 +17,10 @@ inputCVV.setAttribute(
 );
 
 $(document).ready(function(){
-    inputNumberCard.keyup(function () {
-        $(this).val($(this).val().toCardFormat());
-    });
+  //inputNumberCard toCardFormat
+  $("#number").keyup(function () {
+    $(this).val($(this).val().toCardFormat());
+  });
 });
 
 var form = document.getElementById("form-cc");
