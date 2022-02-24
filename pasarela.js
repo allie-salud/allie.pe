@@ -6,7 +6,6 @@ var kushki = new Kushki({
 });
 
 function subscriptionToken(cardDetails = {}){
-  console.log("subscriptionToken");
   let submitButton = document.getElementById('cc-form-submit-btn');
   kushki.requestSubscriptionToken(
     {
@@ -51,8 +50,6 @@ function subscriptionToken(cardDetails = {}){
             }
           },
           error: function(response){
-           console.log("error");
-           console.log(response);
             var errorData = response.responseJSON;
             alert(errorData.message || JSON.stringify(errorData))
           },

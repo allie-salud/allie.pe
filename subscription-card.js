@@ -49,16 +49,14 @@ form.onsubmit = function(e){
   submitButton.dataset.label = submitButton.value;
   submitButton.value = submitButton.dataset.wait;
   let isValidate = validateForm(form);
-  console.log("isValidate => ", isValidate);
   if(isValidate){
     let cardDetails = {
       name: form.name.value,
-      number: form.number.value,
+      number: form.number.value.replace(/ /g, ""),
       cvc: form.cvv.value,
       expiryMonth: form.expiry_month.value,
       expiryYear: form.expiry_year.value,
     };
-    console.log("isValidate subscriptionToken");
     subscriptionToken(cardDetails);
   }else{
     submitButton.removeAttribute("disabled");
