@@ -1,8 +1,21 @@
+String.prototype.toCardFormat = function () {
+    return this.replace(/[^0-9]/g, "").substr(0, 16).split("").reduce(cardFormat, "");
+    function cardFormat(str, l, i) {
+        return str + ((!i || (i % 4)) ? "" : " ") + l;
+    }
+};
+
 let inputNumberCard = document.getElementById("number");
 inputNumberCard.setAttribute(
   "oninput",
   "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
 );
+
+$(document).ready(function(){
+    inputNumberCard.keyup(function () {
+        $(this).val($(this).val().toCardFormat());
+    });
+});
 
 var form = document.getElementById("form-cc");
 
@@ -11,7 +24,7 @@ form.onsubmit = function(e){
   e.preventDefault();
   e.stopPropagation();
   window.app.unsetCard();
-  var submitButton = document.getElementById('cc-form-submit-btn');
+  let submitButton = document.getElementById('cc-form-submit-btn');
   submitButton.setAttribute("disabled", "disabled");
   submitButton.dataset.label = submitButton.value;
   submitButton.value = submitButton.dataset.wait;
@@ -26,6 +39,9 @@ form.onsubmit = function(e){
     };
 
     subscriptionToken(cardDetails);
+  }else{
+    submitButton.removeAttribute("disabled");
+    submitButton.value = submitButton.dataset.label;
   }
 };
 
