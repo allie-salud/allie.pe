@@ -404,7 +404,6 @@ window.app = new Vue({
                 this.validateForm(1);
             },
             onClickSubscription: function(){
-                console.log("Te acabas de subscribir");
                 let idSubscription = document.getElementById("kushki_subscriptionId_input")
                 idSubscription = idSubscription.value
                 let revenueDataLayer = document.getElementsByClassName("totalamountvalue")

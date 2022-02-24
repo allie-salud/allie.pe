@@ -50,7 +50,6 @@ function subscriptionToken(cardDetails = {}){
           },
           error: function(response){
             var errorData = response.responseJSON;
-            console.log(JSON.stringify(errorData, null, 2));
             alert(errorData.message || JSON.stringify(errorData))
           },
           complete: function(){
