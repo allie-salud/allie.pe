@@ -2,7 +2,6 @@
 const isEmpty = str => !str.trim().length;
 let labelValidateCard = document.getElementById("number-validate");
 let labelValidateCVV = document.getElementById("cvv-validate");
-let inputCVV= document.getElementById("cvv");
 
 function validateForm(form) {
   console.log("validateForm");

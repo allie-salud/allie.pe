@@ -5,8 +5,13 @@ String.prototype.toCardFormat = function () {
     }
 };
 
+let inputCVV= document.getElementById("cvv");
 let inputNumberCard = document.getElementById("number");
 inputNumberCard.setAttribute(
+  "oninput",
+  "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+);
+inputCVV.setAttribute(
   "oninput",
   "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
 );
