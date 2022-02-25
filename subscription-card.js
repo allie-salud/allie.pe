@@ -1,3 +1,4 @@
+// inputNumberCard
 let inputNumberCard = document.getElementById("number");
 inputNumberCard.oninput = function() {
   this.value = cc_format(this.value)
@@ -7,20 +8,32 @@ inputNumberCard.setAttribute(
   "return checkDigit(event)"
 );
 
+//floatContainerNumber
+const floatContainerNumber = document.getElementById('floatContainerNumber')
+inputNumberCard.addEventListener('focus', () => {
+  floatContainerNumber.classList.add('active');
+});
+inputNumberCard.addEventListener('blur', (event) => {
+  if(isEmpty(event.target.value)){
+    floatContainerNumber.classList.remove('active');
+  }
+});
+
+//inputCVV
 let inputCVV= document.getElementById("cvv");
 inputCVV.setAttribute(
   "onkeypress",
   "return checkDigit(event)"
 );
 
-const floatContainerNumber = document.getElementById('floatContainerNumber')
-inputNumberCard.addEventListener('focus', () => {
-  floatContainerNumber.classList.add('active');
+//floatContainerCVV
+const floatContainerCVV = document.getElementById('floatContainerCVV')
+inputCVV.addEventListener('focus', () => {
+  floatContainerCVV.classList.add('active');
 });
-inputNumberCard.addEventListener('blur', (event) => {
-  console.log(event.target.value);
+inputCVV.addEventListener('blur', (event) => {
   if(isEmpty(event.target.value)){
-    floatContainerNumber.classList.remove('active');
+    floatContainerCVV.classList.remove('active');
   }
 });
 
