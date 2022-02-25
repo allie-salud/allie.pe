@@ -13,6 +13,14 @@ inputCVV.setAttribute(
   "return checkDigit(event)"
 );
 
+const floatContainerNumber = document.getElementById('floatContainerNumber')
+inputNumberCard.addEventListener('focus', () => {
+  floatContainerNumber.classList.add('active');
+});
+inputNumberCard.addEventListener('blur', () => {
+  floatContainerNumber.classList.remove('active');
+});
+
 function checkDigit(event) {
     var code = (event.which) ? event.which : event.keyCode;
 
