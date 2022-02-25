@@ -57,10 +57,10 @@ let inputExpiryMonth = document.getElementById("expiry_month");
 const floatContainerMonth = document.getElementById('floatContainerMonth')
 inputExpiryMonth.addEventListener('change', () => {
   if(isEmpty(inputExpiryMonth.value)){
-    $('#floatContainerMonth .float-label-select').animate({opacity: 0}, 240);
+    //$('#floatContainerMonth .float-label-select').animate({opacity: 0}, 240);
     floatContainerMonth.classList.remove('active');
   }else{
-    $('#floatContainerMonth .float-label-select').animate({opacity: 1}, 50);
+    //$('#floatContainerMonth .float-label-select').animate({opacity: 1}, 50);
     floatContainerMonth.classList.add('active');
   }
 });
@@ -71,10 +71,10 @@ let inputExpiryYear = document.getElementById("expiry_year");
 const floatContainerYear = document.getElementById('floatContainerYear')
 inputExpiryYear.addEventListener('change', () => {
   if(isEmpty(inputExpiryYear.value)){
-    $('#floatContainerYear .float-label-select').animate({opacity: 0}, 240);
+    //$('#floatContainerYear .float-label-select').animate({opacity: 0}, 240);
     floatContainerYear.classList.remove('active');
   }else{
-    $('#floatContainerYear .float-label-select').animate({opacity: 1}, 50);
+    //$('#floatContainerYear .float-label-select').animate({opacity: 1}, 50);
     floatContainerYear.classList.add('active');
   }
 });
