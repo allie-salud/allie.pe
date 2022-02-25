@@ -113,10 +113,11 @@ form.addEventListener('change', function(e) {
   if(
     !isEmpty(form.name.value) && !isEmpty(form.number.value) &&
     !isEmpty(form.cvv.value) && !isEmpty(form.expiry_month.value) &&
-    !isEmpty(form.expiry_year.value)
+    !isEmpty(form.expiry_year.value) &&
+    form.number.value.replace(/ /g, "").length === 16
   ){
     let submitButton = document.getElementById('cc-form-submit-btn');
-    submitButton.add("active-button-card");
+    submitButton.classList.add("active-button-card");
   }else{
     let submitButton = document.getElementById('cc-form-submit-btn');
     submitButton.classList.remove("active-button-card");
