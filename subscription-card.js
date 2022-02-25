@@ -41,7 +41,7 @@ inputCVV.addEventListener('blur', (event) => {
 let inputName= document.getElementById("name");
 
 //floatContainerName
-const floatContainerName = document.getElementById('floatContainerMonth')
+const floatContainerName = document.getElementById('floatContainerName')
 inputName.addEventListener('focus', () => {
   floatContainerName.classList.add('active');
 });
