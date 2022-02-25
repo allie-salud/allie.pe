@@ -42,7 +42,7 @@ function validateCard(form){
     labelValidateCard.style.display = "block";
     return false;
   }
-  if(form.number.value.length < 16){
+  if(form.number.value.replace(/ /g, "").length < 16){
     labelValidateCard.innerHTML = "Tu tarjeta debe contener 16 dígitos";
     inputNumberCard.classList.add("is-invalid");
     labelValidateCard.style.display = "block";
