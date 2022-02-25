@@ -37,6 +37,48 @@ inputCVV.addEventListener('blur', (event) => {
   }
 });
 
+//inputName
+let inputName= document.getElementById("name");
+
+//floatContainerName
+const floatContainerName = document.getElementById('floatContainerMonth')
+inputName.addEventListener('focus', () => {
+  floatContainerName.classList.add('active');
+});
+inputName.addEventListener('blur', (event) => {
+  if(isEmpty(event.target.value)){
+    floatContainerName.classList.remove('active');
+  }
+});
+
+//inputExpiryMonth
+let inputExpiryMonth = document.getElementById("expiry_month");
+//floatContainerMonth
+const floatContainerMonth = document.getElementById('floatContainerMonth')
+inputExpiryMonth.addEventListener('change', () => {
+  if(isEmpty(inputExpiryMonth.value)){
+    $('#floatContainerMonth .float-label-select').animate({opacity: 0}, 240);
+    floatContainerMonth.classList.remove('active');
+  }else{
+    $('#floatContainerMonth .float-label-select').animate({opacity: 1}, 240);
+    floatContainerMonth.classList.add('active');
+  }
+});
+
+//inputExpiryYear
+let inputExpiryYear = document.getElementById("expiry_year");
+//floatContainerYear
+const floatContainerYear = document.getElementById('floatContainerYear')
+inputExpiryYear.addEventListener('change', () => {
+  if(isEmpty(inputExpiryYear.value)){
+    $('#floatContainerYear .float-label-select').animate({opacity: 0}, 240);
+    floatContainerYear.classList.remove('active');
+  }else{
+    $('#floatContainerYear .float-label-select').animate({opacity: 1}, 240);
+    floatContainerYear.classList.add('active');
+  }
+});
+
 function checkDigit(event) {
     var code = (event.which) ? event.which : event.keyCode;
 

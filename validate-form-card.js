@@ -4,11 +4,8 @@ let labelValidateCard = document.getElementById("number-validate");
 
 let labelValidateCVV = document.getElementById("cvv-validate");
 
-let inputExpiryMonth = document.getElementById("expiry_month");
-let inputExpiryYear = document.getElementById("expiry_year");
 let labelValidateExpiryMonthAndYear= document.getElementById("expiry-month-and-year-validate");
 
-let inputName = document.getElementById("name");
 let labelValidateName = document.getElementById("name-validate");
 
 function validateForm(form) {
