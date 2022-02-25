@@ -77,7 +77,7 @@ function validateExpiryMonthAndYear(form){
       inputExpiryMonth.classList.add("is-invalid");
     }
     if(isEmpty(form.expiry_year.value)){
-      inputExpiryMonth.classList.add("is-invalid");
+      inputExpiryYear.classList.add("is-invalid");
     }
     labelValidateExpiryMonthAndYear.style.display = "block";
     return false;
@@ -107,3 +107,11 @@ function validateName(form){
   }
   return true;
 }
+
+form.addEventListener('change', function(e) {
+    console.log("event");
+    console.log(e);
+    console.log("------------------");
+    console.log("form");
+    console.log(form);
+});
