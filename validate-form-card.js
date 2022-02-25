@@ -56,7 +56,7 @@ function validateCard(form){
 
 function validateCVV(form){
   if(isEmpty(form.cvv.value)){
-    labelValidateCVV.innerHTML = "El código de seguridad es obligatorio";
+    labelValidateCVV.innerHTML = "Código CVV obligatorio";
     inputCVV.classList.add("is-invalid");
     labelValidateCVV.style.display = "block";
     return false;

@@ -17,8 +17,11 @@ const floatContainerNumber = document.getElementById('floatContainerNumber')
 inputNumberCard.addEventListener('focus', () => {
   floatContainerNumber.classList.add('active');
 });
-inputNumberCard.addEventListener('blur', () => {
-  floatContainerNumber.classList.remove('active');
+inputNumberCard.addEventListener('blur', (event) => {
+  console.log(event.target.value);
+  if(isEmpty(event.target.value)){
+    floatContainerNumber.classList.remove('active');
+  }
 });
 
 function checkDigit(event) {
