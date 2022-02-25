@@ -110,8 +110,21 @@ function validateName(form){
 
 form.addEventListener('change', function(e) {
     console.log("event");
-    console.log(e);
+    console.log(e.path);
+    e.path.forEach(element => {
+      console.log(element.id);
+      console.log(element.value);
+    });
     console.log("------------------");
-    console.log("form");
-    console.log(form);
+    console.log("------------------");
+    console.log("form.name.value");
+    console.log(form.name.value);
+    console.log("form.number.value");
+    console.log(form.number.value.replace(/ /g, ""));
+    console.log("form.cvv.value");
+    console.log(form.cvv.value);
+    console.log("form.expiry_month.value");
+    console.log(form.expiry_month.value);
+    console.log("form.expiry_year.value");
+    console.log(form.expiry_year.value);
 });
