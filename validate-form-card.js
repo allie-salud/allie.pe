@@ -109,22 +109,16 @@ function validateName(form){
 }
 
 form.addEventListener('change', function(e) {
-    console.log("event");
-    console.log(e.path);
-    e.path.forEach(element => {
-      console.log(element.id);
-      console.log(element.value);
-    });
-    console.log("------------------");
-    console.log("------------------");
-    console.log("form.name.value");
-    console.log(form.name.value);
-    console.log("form.number.value");
-    console.log(form.number.value.replace(/ /g, ""));
-    console.log("form.cvv.value");
-    console.log(form.cvv.value);
-    console.log("form.expiry_month.value");
-    console.log(form.expiry_month.value);
-    console.log("form.expiry_year.value");
-    console.log(form.expiry_year.value);
+  //active button
+  if(
+    !isEmpty(form.name.value) && !isEmpty(form.number.value) &&
+    !isEmpty(form.cvv.value) && !isEmpty(form.expiry_month.value) &&
+    !isEmpty(form.expiry_year.value)
+  ){
+    let submitButton = document.getElementById('cc-form-submit-btn');
+    submitButton.add("active-button-card");
+  }else{
+    let submitButton = document.getElementById('cc-form-submit-btn');
+    submitButton.classList.remove("active-button-card");
+  }
 });
