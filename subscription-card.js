@@ -60,7 +60,7 @@ inputExpiryMonth.addEventListener('change', () => {
     $('#floatContainerMonth .float-label-select').animate({opacity: 0}, 240);
     floatContainerMonth.classList.remove('active');
   }else{
-    $('#floatContainerMonth .float-label-select').animate({opacity: 1}, 240);
+    $('#floatContainerMonth .float-label-select').animate({opacity: 1}, 50);
     floatContainerMonth.classList.add('active');
   }
 });
@@ -74,7 +74,7 @@ inputExpiryYear.addEventListener('change', () => {
     $('#floatContainerYear .float-label-select').animate({opacity: 0}, 240);
     floatContainerYear.classList.remove('active');
   }else{
-    $('#floatContainerYear .float-label-select').animate({opacity: 1}, 240);
+    $('#floatContainerYear .float-label-select').animate({opacity: 1}, 50);
     floatContainerYear.classList.add('active');
   }
 });
