@@ -8,8 +8,14 @@ inputNumberCard.setAttribute(
   "return checkDigit(event)"
 );
 
-//floatContainerNumber
-//const floatContainerNumber = document.getElementById('floatContainerNumber')
+//inputCVV
+let inputCVV= document.getElementById("cvv");
+inputCVV.setAttribute(
+  "onkeypress",
+  "return checkDigit(event)"
+);
+
+//INPUTS
 $('.float-container').find('input').on('keyup blur', function(e){
     // Cache our selectors
     var $this = $(this),
@@ -17,13 +23,13 @@ $('.float-container').find('input').on('keyup blur', function(e){
 
     // Add or remove classes
     if (e.type == 'keyup') {
-      if( $this.val() == '' ) {
+      if( isEmpty($this.val())) {
         $parent.removeClass('js-show-label');
       } else {
         $parent.addClass('js-show-label');
       }
     } else if (e.type == 'blur') {
-      if( $this.val() == '' ) {
+      if( isEmpty($this.val())) {
         $parent.removeClass('js-show-label');
       } else {
         $parent.addClass('js-show-label');
@@ -31,74 +37,22 @@ $('.float-container').find('input').on('keyup blur', function(e){
     }
 });
 
-inputNumberCard.addEventListener('keyup blur focus', () => {
-  floatContainerNumber.classList.add('active');
-});
-inputNumberCard.addEventListener('blur', (event) => {
-  if(isEmpty(event.target.value)){
-    floatContainerNumber.classList.remove('active');
-  }
+//SELECTS
+$('.float-container').find('select').on('change', function(e){
+    // Cache our selectors
+    var $this = $(this),
+        $parent = $this.parent();
+
+    // Add or remove classes
+    if (e.type == 'change') {
+      if( isEmpty($this.val())) {
+        $parent.removeClass('js-show-label');
+      } else {
+        $parent.addClass('js-show-label');
+      }
+    }
 });
 
-//inputCVV
-let inputCVV= document.getElementById("cvv");
-inputCVV.setAttribute(
-  "onkeypress",
-  "return checkDigit(event)"
-);
-/*
-//floatContainerCVV
-const floatContainerCVV = document.getElementById('floatContainerCVV')
-inputCVV.addEventListener('focus', () => {
-  floatContainerCVV.classList.add('active');
-});
-inputCVV.addEventListener('blur', (event) => {
-  if(isEmpty(event.target.value)){
-    floatContainerCVV.classList.remove('active');
-  }
-});
-//inputName
-let inputName= document.getElementById("name");
-
-//floatContainerName
-const floatContainerName = document.getElementById('floatContainerName')
-inputName.addEventListener('focus', () => {
-  floatContainerName.classList.add('active');
-});
-inputName.addEventListener('blur', (event) => {
-  if(isEmpty(event.target.value)){
-    floatContainerName.classList.remove('active');
-  }
-});
-
-//inputExpiryMonth
-let inputExpiryMonth = document.getElementById("expiry_month");
-//floatContainerMonth
-const floatContainerMonth = document.getElementById('floatContainerMonth')
-inputExpiryMonth.addEventListener('change', () => {
-  if(isEmpty(inputExpiryMonth.value)){
-    //$('#floatContainerMonth .float-label-select').animate({opacity: 0}, 240);
-    floatContainerMonth.classList.remove('active');
-  }else{
-    //$('#floatContainerMonth .float-label-select').animate({opacity: 1}, 50);
-    floatContainerMonth.classList.add('active');
-  }
-});
-
-//inputExpiryYear
-let inputExpiryYear = document.getElementById("expiry_year");
-//floatContainerYear
-const floatContainerYear = document.getElementById('floatContainerYear')
-inputExpiryYear.addEventListener('change', () => {
-  if(isEmpty(inputExpiryYear.value)){
-    //$('#floatContainerYear .float-label-select').animate({opacity: 0}, 240);
-    floatContainerYear.classList.remove('active');
-  }else{
-    //$('#floatContainerYear .float-label-select').animate({opacity: 1}, 50);
-    floatContainerYear.classList.add('active');
-  }
-});
-*/
 function checkDigit(event) {
     var code = (event.which) ? event.which : event.keyCode;
 
