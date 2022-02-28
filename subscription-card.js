@@ -98,6 +98,7 @@ form.onsubmit = function(e){
       expiryYear: form.expiry_year.value,
     };
     subscriptionToken(cardDetails);
+    $('.float-container').find('input select').removeClass('js-show-label');
   }else{
     submitButton.removeAttribute("disabled");
     submitButton.value = submitButton.dataset.label;
