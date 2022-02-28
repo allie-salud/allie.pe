@@ -4,7 +4,7 @@ $(document).on('click', '.product-method input[type="radio"]', function () {
         $('.product-method .product-select-item-wrapper').removeClass('selected');
         $(this).parent().parent().addClass('selected');
     }
-    });
+});
 
 function QuantityInput(elm, startText, decreaseText, increaseText, removeText) {
     var self = this;
