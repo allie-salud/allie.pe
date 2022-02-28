@@ -59,7 +59,7 @@ function validateCVV(form){
     return false;
   }
   if(form.cvv.value.length < 3){
-    labelValidateCVV.innerHTML = "Tu CVV debe tener entre 3 o 4 dígitos";
+    labelValidateCVV.innerHTML = "CVV: contiene 3 o 4 dígitos";
     inputCVV.classList.add("is-invalid");
     labelValidateCVV.style.display = "block";
     return false;
@@ -111,7 +111,8 @@ form.addEventListener('change', function(e) {
     !isEmpty(form.name.value) && !isEmpty(form.number.value) &&
     !isEmpty(form.cvv.value) && !isEmpty(form.expiry_month.value) &&
     !isEmpty(form.expiry_year.value) &&
-    form.number.value.replace(/ /g, "").length === 16
+    form.number.value.replace(/ /g, "").length === 16 &&
+    form.cvv.value.length > 2
   ){
     let submitButton = document.getElementById('cc-form-submit-btn');
     submitButton.classList.add("active-button-card");
