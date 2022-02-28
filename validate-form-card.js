@@ -6,6 +6,7 @@ let labelValidateCVV = document.getElementById("cvv-validate");
 
 let inputExpiryMonth = document.getElementById("expiry_month");
 let inputExpiryYear = document.getElementById("expiry_year");
+let inputName = document.getElementById("name");
 let labelValidateExpiryMonthAndYear= document.getElementById("expiry-month-and-year-validate");
 
 let labelValidateName = document.getElementById("name-validate");
