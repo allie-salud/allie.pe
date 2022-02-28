@@ -9,8 +9,29 @@ inputNumberCard.setAttribute(
 );
 
 //floatContainerNumber
-const floatContainerNumber = document.getElementById('floatContainerNumber')
-inputNumberCard.addEventListener('focus', () => {
+//const floatContainerNumber = document.getElementById('floatContainerNumber')
+$('.float-container').find('input').on('keyup blur', function(e){
+    // Cache our selectors
+    var $this = $(this),
+        $parent = $this.parent();
+
+    // Add or remove classes
+    if (e.type == 'keyup') {
+      if( $this.val() == '' ) {
+        $parent.removeClass('js-show-label');
+      } else {
+        $parent.addClass('js-show-label');
+      }
+    } else if (e.type == 'blur') {
+      if( $this.val() == '' ) {
+        $parent.removeClass('js-show-label');
+      } else {
+        $parent.addClass('js-show-label');
+      }
+    }
+});
+
+inputNumberCard.addEventListener('keyup blur focus', () => {
   floatContainerNumber.classList.add('active');
 });
 inputNumberCard.addEventListener('blur', (event) => {
@@ -25,7 +46,7 @@ inputCVV.setAttribute(
   "onkeypress",
   "return checkDigit(event)"
 );
-
+/*
 //floatContainerCVV
 const floatContainerCVV = document.getElementById('floatContainerCVV')
 inputCVV.addEventListener('focus', () => {
@@ -36,7 +57,6 @@ inputCVV.addEventListener('blur', (event) => {
     floatContainerCVV.classList.remove('active');
   }
 });
-
 //inputName
 let inputName= document.getElementById("name");
 
@@ -78,7 +98,7 @@ inputExpiryYear.addEventListener('change', () => {
     floatContainerYear.classList.add('active');
   }
 });
-
+*/
 function checkDigit(event) {
     var code = (event.which) ? event.which : event.keyCode;
 
