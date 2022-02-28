@@ -342,23 +342,23 @@ window.app = new Vue({
             if ( Number.isInteger(quantity) ) {
                 var cartItemIndex = this.subscription.products.findIndex(
                     function(product){ return product.slug == productData.slug});
+                    window.dataLayer.push({
+                        "ecommerce":{
+                            "add":{
+                                "products":[{
+                                    "id": productData.slug,
+                                    "name": productData.title,
+                                    "price": productData.price,
+                                    "brand": productData.brand,
+                                    "category": productData._type,
+                                    "variant": productData.presentation,
+                                    "quantity": quantity
+                                }]
+                            }
+                        },
+                        "event":"addToCart"
+                    });
                     if (cartItemIndex < 0) {
-                        window.dataLayer.push({
-                            "ecommerce":{
-                                "add":{
-                                    "products":[{
-                                        "id": productData.slug,
-                                        "name": productData.title,
-                                        "price": productData.price,
-                                        "brand": productData.brand,
-                                        "category": productData._type,
-                                        "variant": productData.presentation,
-                                        "quantity": quantity
-                                    }]
-                                }
-                            },
-                            "event":"addToCart"
-                        });
                         this.subscription.products.push({
                             slug: productData.slug,
                             title: productData.title,
@@ -402,6 +402,47 @@ window.app = new Vue({
                     "event":"addToCart"
                 });
                 this.validateForm(1);
+            },
+            onClickSubscription: function(){
+                let idSubscription = document.getElementById("kushki_subscriptionId_input")
+                idSubscription = idSubscription.value
+                let revenueDataLayer = document.getElementsByClassName("totalamountvalue")
+                revenueDataLayer = parseInt(revenueDataLayer[0].innerText)
+                let productsDataLayer = this.subscription.products.map(function(product){
+                    return {
+                        "id": product.slug,
+                        "name": product.title,
+                        "price": product.price,
+                        "brand": product.brand,
+                        "category": product._type,
+                        "variant": product.presentation,
+                        "quantity": product.quantity
+                    }
+                })
+                productsDataLayer.push({
+                    "id": this.subscription.method.slug,
+                    "name": this.subscription.method.title,
+                    "price": this.subscription.method.price,
+                    "brand": this.subscription.method.lab,
+                    "category": "Anticonceptivo",
+                    "variant": this.subscription.method.presentation,
+                    "quantity": 1
+                })
+                window.dataLayer.push({
+                    "ecommerce":{
+                        "purchase":{
+                            "actionField":{
+                                "id": idSubscription,
+                                "affiliation": "Allie",
+                                "revenue": revenueDataLayer,
+                                "tax": revenueDataLayer*0.18,
+                                "shipping": this.deliverySubtotal
+                            },
+                            "products": productsDataLayer
+                        }
+                    },
+                    "event":"orderPurchase"
+                });
             }
         },
     })
