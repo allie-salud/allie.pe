@@ -45,8 +45,8 @@ function validateCard(form){
     labelValidateCard.style.display = "block";
     return false;
   }
-  if(form.number.value.replace(/ /g, "").length < 16){
-    labelValidateCard.innerHTML = "Tu tarjeta debe contener 16 dígitos";
+  if(form.number.value.replace(/ /g, "").length < 13){
+    labelValidateCard.innerHTML = "Tu tarjeta debe contener entre 13 y 19 dígitos";
     inputNumberCard.classList.add("is-invalid");
     labelValidateCard.style.display = "block";
     return false;
@@ -114,7 +114,7 @@ form.addEventListener('change', function(e) {
     !isEmpty(form.name.value) && !isEmpty(form.number.value) &&
     !isEmpty(form.cvv.value) && !isEmpty(form.expiry_month.value) &&
     !isEmpty(form.expiry_year.value) &&
-    form.number.value.replace(/ /g, "").length === 16 &&
+    form.number.value.replace(/ /g, "").length === 13 &&
     form.cvv.value.length > 2
   ){
     let submitButton = document.getElementById('cc-form-submit-btn');
