@@ -345,6 +345,7 @@ window.app = new Vue({
             this.cardSet = false;
         },
         updateCart: function(productData, event){
+            console.log("🚀 ~ file: vueApp.js ~ line 348 ~ productData", productData);
             var quantity = parseInt(event.target.value);
             if ( Number.isInteger(quantity) ) {
                 var cartItemIndex = this.subscription.products.findIndex(
@@ -359,6 +360,7 @@ window.app = new Vue({
                                     "brand": productData.brand,
                                     "category": productData._type,
                                     "variant": productData.presentation,
+                                    "is_once": productData.is_once,
                                     "quantity": quantity
                                 }]
                             }
@@ -375,7 +377,7 @@ window.app = new Vue({
                             presentation: productData.presentation,
                             image: productData.image,
                             quantity: quantity,
-                            is_once: false,
+                            is_once: productData.is_once,
                             _type: productData._type,
                         })
                     } else {
@@ -402,7 +404,7 @@ window.app = new Vue({
                                 "price": this.subscription.method.price,
                                 "brand": this.subscription.method.lab,
                                 "category": "Anticonceptivo",
-                                "is_once": false,
+                                "is_once": this.subscription.method.is_once,
                                 "variant": this.subscription.method.presentation,
                                 "quantity": 1
                             }]
@@ -417,6 +419,7 @@ window.app = new Vue({
                 idSubscription = idSubscription.value
                 let revenueDataLayer = document.getElementsByClassName("totalamountvalue")
                 revenueDataLayer = parseInt(revenueDataLayer[0].innerText)
+                console.log("🚀 ~ file: vueApp.js ~ line 423 ~ productsDataLayer ~ this.subscription.products", this.subscription.products);
                 let productsDataLayer = this.subscription.products.map(function(product){
                     return {
                         "id": product.slug,
@@ -425,7 +428,7 @@ window.app = new Vue({
                         "brand": product.brand,
                         "category": product._type,
                         "variant": product.presentation,
-                        "is_once": false,
+                        "is_once": product.is_once,
                         "quantity": product.quantity
                     }
                 })
@@ -434,7 +437,7 @@ window.app = new Vue({
                     "name": this.subscription.method.title,
                     "price": this.subscription.method.price,
                     "brand": this.subscription.method.lab,
-                    "is_once": false,
+                    "is_once": this.subscription.method.is_once,
                     "category": "Anticonceptivo",
                     "variant": this.subscription.method.presentation,
                     "quantity": 1
