@@ -447,6 +447,7 @@ window.app = new Vue({
                 idSubscription = idSubscription.value
                 let revenueDataLayer = document.getElementsByClassName("totalamountvalue")
                 revenueDataLayer = parseInt(revenueDataLayer[0].innerText)
+                console.log("🚀 ~ file: vueApp.js ~ line 423 ~ productsDataLayer ~ this.subscription.products", this.subscription.products);
                 let productsDataLayer = this.subscription.products.map(function(product){
                     return {
                         "id": product.slug,
