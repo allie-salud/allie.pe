@@ -37,12 +37,16 @@ paymentMethodOptions.forEach(function(item) {
     switch (paymentMethod) {
       case "pos":
         textValue = "POS contra entrega";
+        break;
       case "yape":
         textValue = "Yape";
+        break;
       case "transferencia":
         textValue = "Transferencia";
+        break;
       case "pagolink":
         textValue = "Pago Link / Enlace de pago";
+        break;
     }
     window.dataLayer.push({
         "action":{

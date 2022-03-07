@@ -19,6 +19,13 @@ var FIELDS = {
     COUPON_CODE: $('#coupon_code'),
 }
 
+const uuid = () =>
+    "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0
+    const v = c == "x" ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+})
+
 var NUMERIC_INPUTS = [
     FIELDS.DOCUMENT_NUMBER,
     FIELDS.PHONE
@@ -368,6 +375,7 @@ window.app = new Vue({
                             presentation: productData.presentation,
                             image: productData.image,
                             quantity: quantity,
+                            is_once: false,
                             _type: productData._type,
                         })
                     } else {
@@ -394,6 +402,7 @@ window.app = new Vue({
                                 "price": this.subscription.method.price,
                                 "brand": this.subscription.method.lab,
                                 "category": "Anticonceptivo",
+                                "is_once": false,
                                 "variant": this.subscription.method.presentation,
                                 "quantity": 1
                             }]
@@ -416,6 +425,7 @@ window.app = new Vue({
                         "brand": product.brand,
                         "category": product._type,
                         "variant": product.presentation,
+                        "is_once": false,
                         "quantity": product.quantity
                     }
                 })
@@ -424,6 +434,7 @@ window.app = new Vue({
                     "name": this.subscription.method.title,
                     "price": this.subscription.method.price,
                     "brand": this.subscription.method.lab,
+                    "is_once": false,
                     "category": "Anticonceptivo",
                     "variant": this.subscription.method.presentation,
                     "quantity": 1
@@ -432,7 +443,7 @@ window.app = new Vue({
                     "ecommerce":{
                         "purchase":{
                             "actionField":{
-                                "id": idSubscription,
+                                "id": isEmpty(idSubscription) ? uuid() : idSubscription,
                                 "affiliation": "Allie",
                                 "revenue": revenueDataLayer,
                                 "tax": revenueDataLayer*0.18,
