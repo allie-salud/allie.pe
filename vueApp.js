@@ -254,7 +254,7 @@ window.app = new Vue({
         validateForm: function(index){
             switch (index) {
                 case 1:
-                var noDelivery = (this.methodSubtotal + this.productsSubtotal);
+                var noDelivery = (this.methodSubtotal + this.productsSubtotal + parseFloat(this.oneTimeAmount));
                 if (noDelivery > 0 && noDelivery < 10.00) {
                     this.errors[index] = "El monto total de la suscripción debe ser mayor o igual a 15 soles."
                 } else if (noDelivery == 0) {
