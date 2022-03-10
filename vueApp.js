@@ -344,6 +344,10 @@ window.app = new Vue({
             this.payment = {};
             this.cardSet = false;
         },
+        hasOneTime: () => {
+            return this.subscription.products.filter(product => product.is_once)
+                ?.reduce((acc, product) => acc + product.quantity) > 0;
+        },
         updateCart: function(productData, event){
             console.log("🚀 ~ file: vueApp.js ~ line 348 ~ productData", productData);
             var quantity = parseInt(event.target.value);
