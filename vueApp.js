@@ -346,9 +346,10 @@ window.app = new Vue({
         },
         hasOneTime: function() {
             const productsFilter = this.subscription.products.filter(product => product.is_once);
+            const productsMap = productsFilter.length > 0 ? productsFilter.map(item => item.quantity) : [];
             console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsFilter", productsFilter);
-            console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsReducer", productsFilter.reduce((acc, product) => acc + product.quantity));
-            return (productsFilter.length > 0 ? productsFilter.reduce((acc, product) => acc + product.quantity) : 0) > 0;
+            console.log("🚀 ~ file: vueApp.js ~ line 350 ~ productsMap", productsMap);
+            return (productsMap.length > 0 ? productsMap.reduce((prev, curr) => prev + curr, 0) : 0) > 0;
         },
         updateCart: function(productData, event){
             console.log("🚀 ~ file: vueApp.js ~ line 348 ~ productData", productData);
