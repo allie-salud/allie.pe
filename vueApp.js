@@ -174,14 +174,14 @@ window.app = new Vue({
             return this.subscription.products.filter(product => product.is_once)
                 .reduce(function (sum, product){
                     return sum + product.price * product.quantity
-                }, 0);
+                }, 0).toFixed(2);
         },
         deliverySubtotal: function(){ return 5;},
         subscriptionTotal: function() {
             return this.methodSubtotal + this.productsSubtotal + this.deliverySubtotal;
         },
         firstOrderAmount: function() {
-            return this.subscriptionTotal + this.oneTimeAmount;
+            return (this.subscriptionTotal + this.oneTimeAmount).toFixed(2);
         },
         firstDeliveryTotal: function(){
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
