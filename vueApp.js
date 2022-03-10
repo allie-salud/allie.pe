@@ -363,10 +363,18 @@ window.app = new Vue({
             this.payment = {};
             this.cardSet = false;
         },
+<<<<<<< HEAD
         hasOneTime: function() {
             const productsFilter = this.subscription.products.filter(product => product.is_once);
             const productsMap = productsFilter.length > 0 ? productsFilter.map(item => item.quantity) : [];
             return (productsMap.length > 0 ? productsMap.reduce((prev, curr) => prev + curr, 0) : 0) > 0;
+=======
+        hasOneTime: () => {
+            const productsFilter = this.subscription.products.filter(product => product.is_once);
+            console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsFilter", productsFilter);
+            console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsReducer", productsFilter.reduce((acc, product) => acc + product.quantity));
+            return (productsFilter.length > 0 ? productsFilter.reduce((acc, product) => acc + product.quantity) : 0) > 0;
+>>>>>>> 6611b42 (log)
         },
         updateCart: function(productData, event){
             console.log("🚀 ~ file: vueApp.js ~ line 348 ~ productData", productData);
