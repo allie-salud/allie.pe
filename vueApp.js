@@ -481,10 +481,10 @@ window.app = new Vue({
                 let visible = true;
                 switch (caseValue) {
                     case 1:
-                        visible = this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? false : true;
+                        visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? false : true;
                         break;
                     case 2:
-                        visible = this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? true : false;
+                        visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? true : false;
                         break;
                 }
                 return visible;
