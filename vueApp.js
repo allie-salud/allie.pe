@@ -261,7 +261,7 @@ window.app = new Vue({
                 case 1:
                 var noDelivery = (this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount);
                 if (noDelivery > 0 && noDelivery < 15.00) {
-                    this.errors[index] = "Uy! El monto total de tu compra debe ser igual o mayor a S/15."
+                    this.errors[index] = "Uy! Tu compra debe ser igual o mayor a s/15 (sin contar el delivery)."
                 } else if (noDelivery == 0) {
                     this.errors[index] = "No tienes productos en el carrito";
                 } else {
