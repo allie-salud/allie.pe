@@ -344,7 +344,7 @@ window.app = new Vue({
             this.payment = {};
             this.cardSet = false;
         },
-        hasOneTime: () => {
+        hasOneTime: function() {
             const productsFilter = this.subscription.products.filter(product => product.is_once);
             console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsFilter", productsFilter);
             console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsReducer", productsFilter.reduce((acc, product) => acc + product.quantity));
