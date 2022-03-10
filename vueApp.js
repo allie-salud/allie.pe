@@ -164,7 +164,21 @@ window.app = new Vue({
         },
         cartWithProducts: function(){},
         methodSubtotal: function(){ return this.subscription.method.price || 0 },
-        productsSubtotal: function(){ return this.subscription.products.reduce(function (sum, product){ return sum + product.price * product.quantity }, 0); },
+        productsSubtotal: function(){
+            return this.subscription.products.filter(product => !product.is_once)
+                .reduce(function (sum, product){
+                    return sum + product.price * product.quantity
+                }, 0);
+        },
+        oneTimeAmount: function(){
+            return this.subscription.products.filter(product => product.is_once)
+                .reduce(function (sum, product){
+                    return sum + product.price * product.quantity
+                }, 0);
+        },
+        oneTimeAmount: function() {
+            return this.subscriptionTotal + this.productsSubTotalIsOnce;
+        },
         deliverySubtotal: function(){ return 5;},
         subscriptionTotal: function() {
             return this.methodSubtotal + this.productsSubtotal + this.deliverySubtotal;
@@ -347,8 +361,6 @@ window.app = new Vue({
         hasOneTime: function() {
             const productsFilter = this.subscription.products.filter(product => product.is_once);
             const productsMap = productsFilter.length > 0 ? productsFilter.map(item => item.quantity) : [];
-            console.log("🚀 ~ file: vueApp.js ~ line 349 ~ productsFilter", productsFilter);
-            console.log("🚀 ~ file: vueApp.js ~ line 350 ~ productsMap", productsMap);
             return (productsMap.length > 0 ? productsMap.reduce((prev, curr) => prev + curr, 0) : 0) > 0;
         },
         updateCart: function(productData, event){
