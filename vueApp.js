@@ -476,6 +476,18 @@ window.app = new Vue({
                     },
                     "event":"orderPurchase"
                 });
+            },
+            showTotal: function(caseValue){
+                let visible = true;
+                switch (caseValue) {
+                    case 1:
+                        visible = this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? false : true;
+                        break;
+                    case 2:
+                        visible = this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? true : false;
+                        break;
+                }
+                return visible;
             }
         },
     })
