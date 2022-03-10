@@ -176,7 +176,7 @@ window.app = new Vue({
                     return sum + product.price * product.quantity
                 }, 0);
         },
-        oneTimeAmount: function() {
+        firstOrderAmount: function() {
             return this.subscriptionTotal + this.productsSubTotalIsOnce;
         },
         deliverySubtotal: function(){ return 5;},
