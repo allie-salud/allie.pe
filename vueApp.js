@@ -184,6 +184,7 @@ window.app = new Vue({
             return (this.subscriptionTotal + parseFloat(this.oneTimeAmount)).toFixed(2);
         },
         firstDeliveryTotal: function(){
+            console.log("🚀 ~ file: vueApp.js ~ line 190 ~ this.coupon", this.coupon);
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
 
             if (this.coupon.conditions.appliesToDelivery){
@@ -485,6 +486,12 @@ window.app = new Vue({
                         break;
                     case 2:
                         visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? true : false;
+                        break;
+                    case 3:
+                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && parseFloat(this.oneTimeAmount) == 0 ? true : false;
+                        break;
+                    case 4:
+                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && parseFloat(this.oneTimeAmount) != 0 ? true : false;
                         break;
                 }
                 return visible;
