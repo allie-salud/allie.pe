@@ -501,6 +501,12 @@ window.app = new Vue({
                     case 4:
                         visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && this.oneTimeAmount != 0 ? true : false;
                         break;
+                    case 3:
+                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && parseFloat(this.oneTimeAmount) == 0 ? true : false;
+                        break;
+                    case 4:
+                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && parseFloat(this.oneTimeAmount) != 0 ? true : false;
+                        break;
                 }
                 return visible;
             },
