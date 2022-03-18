@@ -171,20 +171,23 @@ window.app = new Vue({
                 }, 0);
         },
         oneTimeAmount: function(){
-            return this.subscription.products.filter(product => product.is_once)
+            return parseFloat(this.subscription.products.filter(product => product.is_once)
                 .reduce(function (sum, product){
                     return sum + product.price * product.quantity
-                }, 0).toFixed(2);
+                }, 0).toFixed(2));
         },
         deliverySubtotal: function(){ return 5;},
         subscriptionTotal: function() {
             return this.methodSubtotal + this.productsSubtotal + this.deliverySubtotal;
         },
+        onlyOneTime: function() {
+            return ((this.methodSubtotal + this.productsSubtotal == 0) && this.oneTimeAmount > 0);
+        },
         firstOrderAmount: function() {
-            return (this.subscriptionTotal + parseFloat(this.oneTimeAmount)).toFixed(2);
+            return (this.subscriptionTotal + this.oneTimeAmount);
         },
         firstDeliveryTotal: function(){
-            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal + parseFloat(this.oneTimeAmount).toFixed(2);
+            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount;
 
             if (this.coupon.conditions.appliesToDelivery){
                 ticketValueForDiscounts += this.deliverySubtotal;
@@ -192,10 +195,10 @@ window.app = new Vue({
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
             discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue || Infinity, ticketValueForDiscounts);
 
-            return this.subscriptionTotal - discountValue;
+            return this.subscriptionTotal + this.oneTimeAmount - discountValue;
         },
         discountValue: function(){
-            return this.subscriptionTotal - this.firstDeliveryTotal;
+            return this.subscriptionTotal + this.oneTimeAmount - this.firstDeliveryTotal;
         },
         subDetails: function() {
             return {
@@ -254,7 +257,7 @@ window.app = new Vue({
         validateForm: function(index){
             switch (index) {
                 case 1:
-                var noDelivery = (this.methodSubtotal + this.productsSubtotal + parseFloat(this.oneTimeAmount));
+                var noDelivery = (this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount);
                 if (noDelivery > 0 && noDelivery < 10.00) {
                     this.errors[index] = "El monto total de la suscripción debe ser mayor o igual a 15 soles."
                 } else if (noDelivery == 0) {
@@ -481,16 +484,16 @@ window.app = new Vue({
                 let visible = true;
                 switch (caseValue) {
                     case 1:
-                        visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? false : true;
+                        visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && this.oneTimeAmount > 0 ? false : true;
                         break;
                     case 2:
-                        visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && parseFloat(this.oneTimeAmount) > 0 ? true : false;
+                        visible = this.methodSubtotal == 0 && this.productsSubtotal == 0 && this.oneTimeAmount > 0 ? true : false;
                         break;
                     case 3:
-                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && parseFloat(this.oneTimeAmount) == 0 ? true : false;
+                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && this.oneTimeAmount == 0 ? true : false;
                         break;
                     case 4:
-                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && parseFloat(this.oneTimeAmount) != 0 ? true : false;
+                        visible = (this.methodSubtotal != 0 || this.productsSubtotal != 0) && this.oneTimeAmount != 0 ? true : false;
                         break;
                 }
                 return visible;
