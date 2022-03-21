@@ -208,6 +208,7 @@ window.app = new Vue({
                     price: this.subscription.method.price
                 },
                 products: this.subscription.products.map(function(prod){
+                    console.log("🚀 ~ file: vueApp.js ~ line 217 ~ products:this.subscription.products.map ~ prod", prod);
                     return {
                         slug: prod.slug,
                         quantity: prod.quantity,
