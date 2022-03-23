@@ -498,6 +498,15 @@ window.app = new Vue({
                         break;
                 }
                 return visible;
+            },
+            changeOneTime(event, product){
+                product.is_once = !product.is_once;
+                let productsChanges = this.subscription.products.map(row => {
+                    row.is_once = product.is_once;
+                    return row;
+                });
+                this.subscription.products = productsChanges;
+                event.setAttribute("class", "w--redirected-checked");
             }
         },
     })
