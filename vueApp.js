@@ -507,7 +507,7 @@ window.app = new Vue({
                 });
                 this.subscription.products = productsChanges;
                 console.log("🚀 ~ file: vueApp.js ~ line 510 ~ changeOneTime ~ item", item);
-                item.target.setAttribute("class", "w--redirected-checked");
+                item.target.classList.add("class", "w--redirected-checked");
             }
         },
     })
