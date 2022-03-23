@@ -499,14 +499,15 @@ window.app = new Vue({
                 }
                 return visible;
             },
-            changeOneTime(event, product){
+            changeOneTime(item, product){
                 product.is_once = !product.is_once;
                 let productsChanges = this.subscription.products.map(row => {
                     row.is_once = product.is_once;
                     return row;
                 });
                 this.subscription.products = productsChanges;
-                event.setAttribute("class", "w--redirected-checked");
+                console.log("🚀 ~ file: vueApp.js ~ line 510 ~ changeOneTime ~ item", item);
+                item.setAttribute("class", "w--redirected-checked");
             }
         },
     })
