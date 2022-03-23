@@ -502,7 +502,9 @@ window.app = new Vue({
             changeOneTime(item, product){
                 product.is_once = !product.is_once;
                 let productsChanges = this.subscription.products.map(row => {
-                    row.is_once = product.is_once;
+                    if(row.slug == product.slug){
+                        row.is_once = product.is_once;
+                    }
                     return row;
                 });
                 this.subscription.products = productsChanges;
