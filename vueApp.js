@@ -187,7 +187,7 @@ window.app = new Vue({
             return (this.subscriptionTotal + this.oneTimeAmount);
         },
         firstDeliveryTotal: function(){
-            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount;
+            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
 
             if (this.coupon.conditions.appliesToDelivery){
                 ticketValueForDiscounts += this.deliverySubtotal;
@@ -259,7 +259,7 @@ window.app = new Vue({
             switch (index) {
                 case 1:
                 var noDelivery = (this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount);
-                if (noDelivery > 0 && noDelivery < 10.00) {
+                if (noDelivery > 0 && noDelivery < 15.00) {
                     this.errors[index] = "Uy! El monto total de tu compra debe ser igual o mayor a S/15."
                 } else if (noDelivery == 0) {
                     this.errors[index] = "No tienes productos en el carrito";
