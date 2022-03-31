@@ -259,8 +259,8 @@ window.app = new Vue({
             switch (index) {
                 case 1:
                 var noDelivery = (this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount);
-                if (noDelivery > 0 && noDelivery < 10.00) {
-                    this.errors[index] = "El monto total de la suscripción debe ser mayor o igual a 15 soles."
+                if (noDelivery > 0 && noDelivery < 15.00) {
+                    this.errors[index] = "Uy! El monto total de tu compra debe ser igual o mayor a S/15."
                 } else if (noDelivery == 0) {
                     this.errors[index] = "No tienes productos en el carrito";
                 } else {
@@ -418,6 +418,7 @@ window.app = new Vue({
                 this.validateForm(1);
             },
             onChangeMethod: function(){
+                console.log("🚀 ~ file: vueApp.js ~ line 427 ~ this.subscription.method", this.subscription.method)
                 window.dataLayer.push({
                     "ecommerce":{
                         "add":{
@@ -498,6 +499,22 @@ window.app = new Vue({
                         break;
                 }
                 return visible;
+            },
+            changeOneTime(item, product){
+                product.is_once = !product.is_once;
+                let productsChanges = this.subscription.products.map(row => {
+                    if(row.slug == product.slug){
+                        row.is_once = product.is_once;
+                    }
+                    return row;
+                });
+                this.subscription.products = productsChanges;
+                console.log("🚀 ~ file: vueApp.js ~ line 510 ~ changeOneTime ~ item", item);
+                if(product.is_once){
+                    item.target.classList.add("w--redirected-checked");
+                }else{
+                    item.target.classList.remove("w--redirected-checked");
+                }
             }
         },
     })
