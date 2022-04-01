@@ -384,7 +384,8 @@ window.app = new Vue({
                                     "category": productData._type,
                                     "variant": productData.presentation,
                                     "is_once": productData.is_once,
-                                    "quantity": quantity
+                                    "quantity": quantity,
+                                    "active_one_time": productData.active_one_time,
                                 }]
                             }
                         },
@@ -401,6 +402,7 @@ window.app = new Vue({
                             image: productData.image,
                             quantity: quantity,
                             is_once: productData.is_once,
+                            active_one_time: productData.active_one_time,
                             _type: productData._type,
                         })
                     } else {
@@ -430,6 +432,7 @@ window.app = new Vue({
                                 "category": "Anticonceptivo",
                                 "is_once": this.subscription.method.is_once,
                                 "variant": this.subscription.method.presentation,
+                                "active_one_time": this.subscription.method.active_one_time,
                                 "quantity": 1
                             }]
                         }
@@ -453,7 +456,8 @@ window.app = new Vue({
                         "category": product._type,
                         "variant": product.presentation,
                         "is_once": product.is_once,
-                        "quantity": product.quantity
+                        "quantity": product.quantity,
+                        "active_one_time": product.active_one_time,
                     }
                 })
                 productsDataLayer.push({
@@ -464,6 +468,7 @@ window.app = new Vue({
                     "is_once": this.subscription.method.is_once,
                     "category": "Anticonceptivo",
                     "variant": this.subscription.method.presentation,
+                    "active_one_time": this.subscription.method.active_one_time,
                     "quantity": 1
                 })
                 window.dataLayer.push({
