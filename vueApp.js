@@ -171,10 +171,10 @@ window.app = new Vue({
                 }, 0);
         },
         oneTimeAmount: function(){
-            return parseFloat(this.subscription.products.filter(product => product.is_once)
+            return this.subscription.products.filter(product => product.is_once)
                 .reduce(function (sum, product){
                     return sum + product.price * product.quantity
-                }, 0).toFixed(2));
+                }, 0);
         },
         deliverySubtotal: function(){ return 5;},
         subscriptionTotal: function() {
@@ -187,14 +187,15 @@ window.app = new Vue({
             return (this.subscriptionTotal + this.oneTimeAmount);
         },
         firstDeliveryTotal: function(){
-            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount;
-
-            if (this.coupon.conditions.appliesToDelivery){
-                ticketValueForDiscounts += this.deliverySubtotal;
+            let ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
+            let discountValue = 0;
+            if(this.coupon !== null){
+                if (this.coupon.conditions.appliesToDelivery){
+                    ticketValueForDiscounts += this.deliverySubtotal;
+                }
+                discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
+                discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue || Infinity, ticketValueForDiscounts);
             }
-            var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
-            discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue || Infinity, ticketValueForDiscounts);
-
             return this.subscriptionTotal + this.oneTimeAmount - discountValue;
         },
         discountValue: function(){
@@ -260,7 +261,7 @@ window.app = new Vue({
                 case 1:
                 var noDelivery = (this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount);
                 if (noDelivery > 0 && noDelivery < 15.00) {
-                    this.errors[index] = "Uy! El monto total de tu compra debe ser igual o mayor a S/15."
+                    this.errors[index] = "Uy! Tu compra debe ser igual o mayor a s/15 (sin contar el delivery)."
                 } else if (noDelivery == 0) {
                     this.errors[index] = "No tienes productos en el carrito";
                 } else {
@@ -384,7 +385,8 @@ window.app = new Vue({
                                     "category": productData._type,
                                     "variant": productData.presentation,
                                     "is_once": productData.is_once,
-                                    "quantity": quantity
+                                    "quantity": quantity,
+                                    "active_one_time": productData.active_one_time,
                                 }]
                             }
                         },
@@ -401,6 +403,7 @@ window.app = new Vue({
                             image: productData.image,
                             quantity: quantity,
                             is_once: productData.is_once,
+                            active_one_time: productData.active_one_time,
                             _type: productData._type,
                         })
                     } else {
@@ -430,6 +433,7 @@ window.app = new Vue({
                                 "category": "Anticonceptivo",
                                 "is_once": this.subscription.method.is_once,
                                 "variant": this.subscription.method.presentation,
+                                "active_one_time": this.subscription.method.active_one_time,
                                 "quantity": 1
                             }]
                         }
@@ -443,7 +447,6 @@ window.app = new Vue({
                 idSubscription = idSubscription.value
                 let revenueDataLayer = document.getElementsByClassName("totalamountvalue")
                 revenueDataLayer = parseInt(revenueDataLayer[0].innerText)
-                console.log("🚀 ~ file: vueApp.js ~ line 423 ~ productsDataLayer ~ this.subscription.products", this.subscription.products);
                 let productsDataLayer = this.subscription.products.map(function(product){
                     return {
                         "id": product.slug,
@@ -453,7 +456,8 @@ window.app = new Vue({
                         "category": product._type,
                         "variant": product.presentation,
                         "is_once": product.is_once,
-                        "quantity": product.quantity
+                        "quantity": product.quantity,
+                        "active_one_time": product.active_one_time,
                     }
                 })
                 productsDataLayer.push({
@@ -464,6 +468,7 @@ window.app = new Vue({
                     "is_once": this.subscription.method.is_once,
                     "category": "Anticonceptivo",
                     "variant": this.subscription.method.presentation,
+                    "active_one_time": this.subscription.method.active_one_time,
                     "quantity": 1
                 })
                 window.dataLayer.push({
@@ -509,7 +514,6 @@ window.app = new Vue({
                     return row;
                 });
                 this.subscription.products = productsChanges;
-                console.log("🚀 ~ file: vueApp.js ~ line 510 ~ changeOneTime ~ item", item);
                 if(product.is_once){
                     item.target.classList.add("w--redirected-checked");
                 }else{
