@@ -195,7 +195,7 @@ window.app = new Vue({
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
             discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue || Infinity, ticketValueForDiscounts);
 
-            return this.subscriptionTotal + this.oneTimeAmount - discountValue;
+            return this.subscriptionTotal + this.oneTimeAmount - (discountValue > 0 ? discountValue : 0);
         },
         discountValue: function(){
             return this.subscriptionTotal + this.oneTimeAmount - this.firstDeliveryTotal;
