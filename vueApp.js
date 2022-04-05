@@ -421,7 +421,6 @@ window.app = new Vue({
                 this.validateForm(1);
             },
             onChangeMethod: function(){
-                console.log("🚀 ~ file: vueApp.js ~ line 427 ~ this.subscription.method", this.subscription.method)
                 window.dataLayer.push({
                     "ecommerce":{
                         "add":{
