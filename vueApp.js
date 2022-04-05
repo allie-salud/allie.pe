@@ -171,10 +171,10 @@ window.app = new Vue({
                 }, 0);
         },
         oneTimeAmount: function(){
-            return parseFloat(this.subscription.products.filter(product => product.is_once)
+            return this.subscription.products.filter(product => product.is_once)
                 .reduce(function (sum, product){
                     return sum + product.price * product.quantity
-                }, 0).toFixed(2));
+                }, 0);
         },
         deliverySubtotal: function(){ return 5;},
         subscriptionTotal: function() {
@@ -194,7 +194,7 @@ window.app = new Vue({
             }
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
             discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue || Infinity, ticketValueForDiscounts);
-
+            discountValue = isNum(discountValue) ? discountValue : 0;
             return this.subscriptionTotal + this.oneTimeAmount - (discountValue > 0 ? discountValue : 0);
         },
         discountValue: function(){
