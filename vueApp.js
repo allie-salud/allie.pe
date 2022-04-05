@@ -189,11 +189,14 @@ window.app = new Vue({
         firstDeliveryTotal: function(){
             var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
 
+            console.log("🚀 ~ file: vueApp.js ~ line 193 ~ this.coupon", this.coupon);
             if (this.coupon.conditions.appliesToDelivery){
                 ticketValueForDiscounts += this.deliverySubtotal;
             }
             var discountValue = this.coupon.discount.value || this.coupon.discount.percentage * ticketValueForDiscounts;
+            console.log("🚀 ~ file: vueApp.js ~ line 197 ~ discountValue", discountValue);
             discountValue = Math.min(discountValue, this.coupon.conditions.maximumDiscountValue || Infinity, ticketValueForDiscounts);
+            console.log("🚀 ~ file: vueApp.js ~ line 199 ~ discountValue", discountValue);
             discountValue = isNum(discountValue) ? discountValue : 0;
             return this.subscriptionTotal + this.oneTimeAmount - (discountValue > 0 ? discountValue : 0);
         },
