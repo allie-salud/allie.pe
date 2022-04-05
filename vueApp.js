@@ -171,10 +171,10 @@ window.app = new Vue({
                 }, 0);
         },
         oneTimeAmount: function(){
-            return parseFloat(this.subscription.products.filter(product => product.is_once)
+            return this.subscription.products.filter(product => product.is_once)
                 .reduce(function (sum, product){
                     return sum + product.price * product.quantity
-                }, 0).toFixed(2));
+                }, 0);
         },
         deliverySubtotal: function(){ return 5;},
         subscriptionTotal: function() {
