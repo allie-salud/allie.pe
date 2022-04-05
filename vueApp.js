@@ -187,7 +187,7 @@ window.app = new Vue({
             return (this.subscriptionTotal + this.oneTimeAmount);
         },
         firstDeliveryTotal: function(){
-            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount;
+            var ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
 
             if (this.coupon.conditions.appliesToDelivery){
                 ticketValueForDiscounts += this.deliverySubtotal;
