@@ -114,7 +114,7 @@ form.addEventListener('change', function(e) {
     !isEmpty(form.name.value) && !isEmpty(form.number.value) &&
     !isEmpty(form.cvv.value) && !isEmpty(form.expiry_month.value) &&
     !isEmpty(form.expiry_year.value) &&
-    form.number.value.replace(/ /g, "").length === 13 &&
+    form.number.value.replace(/ /g, "").length >= 13 &&
     form.cvv.value.length > 2
   ){
     let submitButton = document.getElementById('cc-form-submit-btn');
