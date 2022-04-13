@@ -1,8 +1,8 @@
-// var merchantId = "372c1e79e21f4420b954fce1c5830e63";
-var merchantId = '80693fa55aeb481bb9ac134ce92b0c2e'; // prod
+var merchantId = '372c1e79e21f4420b954fce1c5830e63';
+// var merchantId = '80693fa55aeb481bb9ac134ce92b0c2e'; // prod
 var kushki = new Kushki({
   merchantId: merchantId,
-  inTestEnvironment: false,
+  inTestEnvironment: true,
 });
 
 function subscriptionToken(cardDetails = {}) {
