@@ -57,11 +57,14 @@ function subscriptionToken(cardDetails = {}) {
           },
           error: function (response) {
             var errorData = response.responseJSON;
-            document.getElementsByClassName('container-error').style.display =
-              'flex';
-            document.getElementById('title-error-cc')[0].innerHTML =
+            let containerErrors =
+              document.getElementsByClassName('container-error');
+            for (i = 0; i < containerErrors.length; i++) {
+              containerErrors[i].style.display = 'flex';
+            }
+            document.getElementById('title-error-cc').innerHTML =
               ' Hubo un inconveniente con tu tarjeta.';
-            document.getElementById('message-error-cc')[0].innerHTML =
+            document.getElementById('message-error-cc').innerHTML =
               'Por favor, prueba con otra o cambiando el medio de pago. Si el problema persiste, comunícate con nosotros vía WhatsApp.';
             console.error(
               'Message: ',
@@ -75,19 +78,25 @@ function subscriptionToken(cardDetails = {}) {
         });
       } else {
         if (response.code == 'k322') {
-          document.getElementsByClassName('container-error').style.display =
-            'flex';
-          document.getElementById('title-error-cc')[0].innerHTML =
+          let containerErrors =
+            document.getElementsByClassName('container-error');
+          for (i = 0; i < containerErrors.length; i++) {
+            containerErrors[i].style.display = 'flex';
+          }
+          document.getElementById('title-error-cc').innerHTML =
             'Uy! Puede que los datos de tu tarjeta no sean correctos.';
-          document.getElementById('message-error-cc')[0].innerHTML =
+          document.getElementById('message-error-cc').innerHTML =
             'Intenta nuevamente o con otro medio de pago. ¿Necesitas más información? Comunícate con Kushki.';
         }
         if (response.code == '006') {
-          document.getElementsByClassName('container-error').style.display =
-            'flex';
-          document.getElementById('title-error-cc')[0].innerHTML =
+          let containerErrors =
+            document.getElementsByClassName('container-error');
+          for (i = 0; i < containerErrors.length; i++) {
+            containerErrors[i].style.display = 'flex';
+          }
+          document.getElementById('title-error-cc').innerHTML =
             'Lo sentimos, no se logró realizar la transacción.';
-          document.getElementById('message-error-cc')[0].innerHTML =
+          document.getElementById('message-error-cc').innerHTML =
             'Intenta con otra tarjeta o medio de pago, por favor. ¿Necesitas más información? Comunícate con tu banco.';
         }
         console.error(
