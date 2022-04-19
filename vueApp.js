@@ -602,8 +602,13 @@ window.app = new Vue({
       }
       return visible;
     },
-    changeOneTimeMethod() {
+    changeOneTimeMethod(item, product) {
       this.subscription.method.is_once = !this.subscription.method.is_once;
+      if (this.subscription.method.is_once) {
+        item.target.classList.add('w--redirected-checked');
+      } else {
+        item.target.classList.remove('w--redirected-checked');
+      }
     },
     changeOneTime(item, product) {
       product.is_once = !product.is_once;
