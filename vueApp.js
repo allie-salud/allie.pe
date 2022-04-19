@@ -108,7 +108,6 @@ var FIRST_DELIVERY_DATE_PICKER =
 FIELDS.FIRST_DELIVERY_DATE_STR.on('change', function () {
   if ((this.value && this.validity.customError) || this.checkValidity()) {
     var dateParts = this.value.split('/');
-    console.log('delivery_dateParts', dateParts);
     var date = new Date(
       parseInt(dateParts[2]),
       parseInt(dateParts[1]) - 1,
@@ -166,7 +165,11 @@ window.app = new Vue({
     },
     cartWithProducts: function () {},
     methodSubtotal: function () {
-      return this.subscription.method.price || 0;
+      return (
+        (this.subscription.method.is_once
+          ? 0
+          : this.subscription.method.price) || 0
+      );
     },
     productsSubtotal: function () {
       return this.subscription.products
@@ -176,11 +179,14 @@ window.app = new Vue({
         }, 0);
     },
     oneTimeAmount: function () {
-      return this.subscription.products
-        .filter((product) => product.is_once)
-        .reduce(function (sum, product) {
-          return sum + product.price * product.quantity;
-        }, 0);
+      return (
+        this.subscription.products
+          .filter((product) => product.is_once)
+          .reduce(function (sum, product) {
+            return sum + product.price * product.quantity;
+          }, 0) +
+        (this.subscription.method.is_once ? this.subscription.method.price : 0)
+      );
     },
     deliverySubtotal: function () {
       return 5;
@@ -430,7 +436,6 @@ window.app = new Vue({
       );
     },
     updateCart: function (productData, event) {
-      console.log('🚀 ~ file: vueApp.js ~ line 348 ~ productData', productData);
       var quantity = parseInt(event.target.value);
       if (Number.isInteger(quantity)) {
         var cartItemIndex = this.subscription.products.findIndex(function (
