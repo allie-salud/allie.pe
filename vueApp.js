@@ -602,6 +602,9 @@ window.app = new Vue({
       }
       return visible;
     },
+    changeOneTimeMethod() {
+      this.subscription.method.is_once = !this.subscription.method.is_once;
+    },
     changeOneTime(item, product) {
       product.is_once = !product.is_once;
       let productsChanges = this.subscription.products.map((row) => {
