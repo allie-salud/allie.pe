@@ -452,6 +452,7 @@ window.app = new Vue({
                   is_once: productData.is_once,
                   quantity: quantity,
                   active_one_time: productData.active_one_time,
+                  require_prescription: productData.require_prescription,
                 },
               ],
             },
@@ -470,6 +471,7 @@ window.app = new Vue({
             quantity: quantity,
             is_once: productData.is_once,
             active_one_time: productData.active_one_time,
+            require_prescription: productData.require_prescription,
             _type: productData._type,
           });
         } else {
@@ -488,19 +490,21 @@ window.app = new Vue({
       this.validateForm(1);
     },
     onChangeMethod: function () {
+      const subscriptionMethod = this.subscription.method;
       window.dataLayer.push({
         ecommerce: {
           add: {
             products: [
               {
-                id: this.subscription.method.slug,
-                name: this.subscription.method.title,
-                price: this.subscription.method.price,
-                brand: this.subscription.method.lab,
+                id: subscriptionMethod.slug,
+                name: subscriptionMethod.title,
+                price: subscriptionMethod.price,
+                brand: subscriptionMethod.lab,
                 category: 'Anticonceptivo',
-                is_once: this.subscription.method.is_once,
-                variant: this.subscription.method.presentation,
-                active_one_time: this.subscription.method.active_one_time,
+                is_once: subscriptionMethod.is_once,
+                variant: subscriptionMethod.presentation,
+                active_one_time: subscriptionMethod.active_one_time,
+                require_prescription: subscriptionMethod.require_prescription,
                 quantity: 1,
               },
             ],
@@ -531,6 +535,7 @@ window.app = new Vue({
           is_once: product.is_once,
           quantity: product.quantity,
           active_one_time: product.active_one_time,
+          require_prescription: product.require_prescription,
         };
       });
       productsDataLayer.push({
@@ -542,6 +547,7 @@ window.app = new Vue({
         category: 'Anticonceptivo',
         variant: this.subscription.method.presentation,
         active_one_time: this.subscription.method.active_one_time,
+        require_prescription: this.subscription.method.require_prescription,
         quantity: 1,
       });
       window.dataLayer.push({
