@@ -311,7 +311,6 @@ window.app = new Vue({
             FIELDS.PHONE,
             FIELDS.EMAIL,
             FIELDS.TYC,
-            FIELDS.BNP,
           ];
 
           for (var i = 0; i < inputs.length; i++) {
@@ -322,7 +321,7 @@ window.app = new Vue({
                 'Por favor, ingresa correctamente todos los campos requeridos.';
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc, .form-input-bnp'
+                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc'
                 )
                 .addClass('invalid');
               // _input.reportValidity()
@@ -330,7 +329,7 @@ window.app = new Vue({
             } else {
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc, .form-input-bnp'
+                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc'
                 )
                 .removeClass('invalid');
             }
