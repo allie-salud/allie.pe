@@ -70,6 +70,8 @@ recurringCardPayment.onclick = function () {
 
 let acceptTyc = document.getElementById('accept-tyc');
 acceptTyc.onclick = function () {
+  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
+  checkboxDiv[0].classList.add('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-tyc');
   checkboxInput.checked = true;
 };
