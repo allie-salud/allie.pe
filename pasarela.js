@@ -65,7 +65,7 @@ function subscriptionToken(cardDetails = {}) {
             }
             //Se recibio la respuesta del servidor pero no se pudo procesar
             if (response.readyState === 4) {
-              if (errorData.code.toLowerCase() == 'K322') {
+              if (errorData.code.toLowerCase() == 'k322') {
                 let containerErrors =
                   document.getElementsByClassName('container-error');
                 for (i = 0; i < containerErrors.length; i++) {
