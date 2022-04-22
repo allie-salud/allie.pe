@@ -75,3 +75,29 @@ acceptTyc.onclick = function () {
   let checkboxInput = document.getElementById('tac-tyc');
   checkboxInput.checked = true;
 };
+
+let cancelTyc = document.getElementById('cancel-tyc');
+cancelTyc.onclick = function () {
+  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
+  checkboxDiv[0].classList.remove('w--redirected-checked');
+  let checkboxInput = document.getElementById('tac-tyc');
+  checkboxInput.checked = false;
+}
+
+
+
+let acceptBnp = document.getElementById('accept-bnp');
+acceptBnp.onclick = function () {
+  let checkboxDiv = document.getElementsByClassName('checkbox-bnp');
+  checkboxDiv[0].classList.add('w--redirected-checked');
+  let checkboxInput = document.getElementById('tac-bnp');
+  checkboxInput.checked = true;
+}
+
+let cancelBnp = document.getElementById('cancel-bnp');
+cancelBnp.onclick = function () {
+  let checkboxDiv = document.getElementsByClassName('checkbox-bnp');
+  checkboxDiv[0].classList.remove('w--redirected-checked');
+  let checkboxInput = document.getElementById('tac-bnp');
+  checkboxInput.checked = false;
+}
