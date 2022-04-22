@@ -84,6 +84,22 @@ cancelTyc.onclick = function () {
   checkboxInput.checked = false;
 }
 
+let acceptPdd = document.getElementById('accept-pdd');
+acceptPdd.onclick = function () {
+  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
+  checkboxDiv[0].classList.add('w--redirected-checked');
+  let checkboxInput = document.getElementById('tac-tyc');
+  checkboxInput.checked = true;
+};
+
+let cancelPdd = document.getElementById('cancel-pdd');
+cancelPdd.onclick = function () {
+  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
+  checkboxDiv[0].classList.remove('w--redirected-checked');
+  let checkboxInput = document.getElementById('tac-tyc');
+  checkboxInput.checked = false;
+}
+
 
 
 let acceptBnp = document.getElementById('accept-bnp');
