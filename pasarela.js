@@ -65,7 +65,7 @@ function subscriptionToken(cardDetails = {}) {
             }
             //Se recibio la respuesta del servidor pero no se pudo procesar
             if (response.readyState === 4) {
-              if (errorData.code.toLowerCase() == 'k322') {
+              if (errorData.code.toLowerCase() == '006') {
                 let containerErrors =
                   document.getElementsByClassName('container-error');
                 for (i = 0; i < containerErrors.length; i++) {
@@ -74,9 +74,9 @@ function subscriptionToken(cardDetails = {}) {
                 document.getElementById('title-error-cc').innerHTML =
                   'Uy! Puede que los datos de tu tarjeta no sean correctos.';
                 document.getElementById('message-error-cc').innerHTML =
-                  'Intenta nuevamente o con otro medio de pago. ¿Necesitas más información? Comunícate con Kushki.';
+                  'Intenta nuevamente o con otro medio de pago. ¿Necesitas más información? Comunícate con tu banco.';
               }
-              if (errorData.code == '006') {
+              if (errorData.code.toLowerCase() == 'k322') {
                 let containerErrors =
                   document.getElementsByClassName('container-error');
                 for (i = 0; i < containerErrors.length; i++) {
@@ -85,7 +85,7 @@ function subscriptionToken(cardDetails = {}) {
                 document.getElementById('title-error-cc').innerHTML =
                   'Lo sentimos, no se logró realizar la transacción.';
                 document.getElementById('message-error-cc').innerHTML =
-                  'Intenta con otra tarjeta o medio de pago, por favor. ¿Necesitas más información? Comunícate con tu banco.';
+                  'Intenta con otra tarjeta o medio de pago, por favor. ¿Necesitas más información? Comunícate con Kushki.';
               }
             } else {
               //No se recibio respuesta del servidor
@@ -105,7 +105,7 @@ function subscriptionToken(cardDetails = {}) {
           },
         });
       } else {
-        if (response.code.toLowerCase() == 'k322') {
+        if (response.code.toLowerCase() == '006') {
           let containerErrors =
             document.getElementsByClassName('container-error');
           for (i = 0; i < containerErrors.length; i++) {
@@ -114,9 +114,9 @@ function subscriptionToken(cardDetails = {}) {
           document.getElementById('title-error-cc').innerHTML =
             'Uy! Puede que los datos de tu tarjeta no sean correctos.';
           document.getElementById('message-error-cc').innerHTML =
-            'Intenta nuevamente o con otro medio de pago. ¿Necesitas más información? Comunícate con Kushki.';
+            'Intenta nuevamente o con otro medio de pago. ¿Necesitas más información? Comunícate con tu banco.';
         }
-        if (response.code == '006') {
+        if (response.code.toLowerCase() == 'k322') {
           let containerErrors =
             document.getElementsByClassName('container-error');
           for (i = 0; i < containerErrors.length; i++) {
@@ -125,7 +125,7 @@ function subscriptionToken(cardDetails = {}) {
           document.getElementById('title-error-cc').innerHTML =
             'Lo sentimos, no se logró realizar la transacción.';
           document.getElementById('message-error-cc').innerHTML =
-            'Intenta con otra tarjeta o medio de pago, por favor. ¿Necesitas más información? Comunícate con tu banco.';
+            'Intenta con otra tarjeta o medio de pago, por favor. ¿Necesitas más información? Comunícate con Kushki.';
         }
         submitButton.removeAttribute('disabled');
         submitButton.value = submitButton.dataset.label;
