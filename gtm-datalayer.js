@@ -74,6 +74,13 @@ acceptTyc.onclick = function () {
   checkboxDiv[0].classList.add('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-tyc');
   checkboxInput.checked = true;
+  let today = new Date();
+  let date =
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  let hour =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  let dateAndHour = date + ' ' + hour;
+  document.getElementById('input-date-tyc').value = dateAndHour;
 };
 
 let cancelTyc = document.getElementById('cancel-tyc');
@@ -90,6 +97,13 @@ acceptPdd.onclick = function () {
   checkboxDiv[0].classList.add('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-tyc');
   checkboxInput.checked = true;
+  let today = new Date();
+  let date =
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  let hour =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  let dateAndHour = date + ' ' + hour;
+  document.getElementById('input-date-tyc').value = dateAndHour;
 };
 
 let cancelPdd = document.getElementById('cancel-pdd');
@@ -106,6 +120,13 @@ acceptBnp.onclick = function () {
   checkboxDiv[0].classList.add('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-bnp');
   checkboxInput.checked = true;
+  let today = new Date();
+  let date =
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  let hour =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  let dateAndHour = date + ' ' + hour;
+  document.getElementById('input-date-bnp').value = dateAndHour;
 };
 
 let cancelBnp = document.getElementById('cancel-bnp');
@@ -123,10 +144,6 @@ $('#tac-tyc').on('change', function () {
   let hour =
     today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
   let dateAndHour = date + ' ' + hour;
-  console.log(
-    '🚀 ~ file: gtm-datalayer.js ~ line 124 ~ dateAndHour',
-    dateAndHour
-  );
   document.getElementById('input-date-tyc').value = dateAndHour;
 });
 
@@ -137,9 +154,5 @@ $('#tac-bnp').on('change', function () {
   let hour =
     today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
   let dateAndHour = date + ' ' + hour;
-  console.log(
-    '🚀 ~ file: gtm-datalayer.js ~ line 136 ~ dateAndHour',
-    dateAndHour
-  );
   document.getElementById('input-date-bnp').value = dateAndHour;
 });
