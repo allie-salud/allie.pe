@@ -117,9 +117,11 @@ cancelBnp.onclick = function () {
 };
 
 $('#tac-tyc').on('change', function () {
+  let today = new Date();
   let date =
-    hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
-  let hour = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  let hour =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
   let dateAndHour = date + ' ' + hour;
   console.log(
     '🚀 ~ file: gtm-datalayer.js ~ line 124 ~ dateAndHour',
@@ -129,9 +131,11 @@ $('#tac-tyc').on('change', function () {
 });
 
 $('#tac-bnp').on('change', function () {
+  let today = new Date();
   let date =
-    hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
-  let hour = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  let hour =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
   let dateAndHour = date + ' ' + hour;
   console.log(
     '🚀 ~ file: gtm-datalayer.js ~ line 136 ~ dateAndHour',
