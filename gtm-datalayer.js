@@ -115,3 +115,27 @@ cancelBnp.onclick = function () {
   let checkboxInput = document.getElementById('tac-bnp');
   checkboxInput.checked = false;
 };
+
+$('#tac-tyc').on('change', function () {
+  let date =
+    hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+  let hour = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+  let dateAndHour = date + ' ' + hour;
+  console.log(
+    '🚀 ~ file: gtm-datalayer.js ~ line 124 ~ dateAndHour',
+    dateAndHour
+  );
+  document.getElementById('input-date-tyc').value = dateAndHour;
+});
+
+$('#tac-bnp').on('change', function () {
+  let date =
+    hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+  let hour = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+  let dateAndHour = date + ' ' + hour;
+  console.log(
+    '🚀 ~ file: gtm-datalayer.js ~ line 136 ~ dateAndHour',
+    dateAndHour
+  );
+  document.getElementById('input-date-bnp').value = dateAndHour;
+});
