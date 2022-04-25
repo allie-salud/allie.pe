@@ -82,7 +82,7 @@ cancelTyc.onclick = function () {
   checkboxDiv[0].classList.remove('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-tyc');
   checkboxInput.checked = false;
-}
+};
 
 let acceptPdd = document.getElementById('accept-pdd');
 acceptPdd.onclick = function () {
@@ -98,9 +98,7 @@ cancelPdd.onclick = function () {
   checkboxDiv[0].classList.remove('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-tyc');
   checkboxInput.checked = false;
-}
-
-
+};
 
 let acceptBnp = document.getElementById('accept-bnp');
 acceptBnp.onclick = function () {
@@ -108,7 +106,7 @@ acceptBnp.onclick = function () {
   checkboxDiv[0].classList.add('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-bnp');
   checkboxInput.checked = true;
-}
+};
 
 let cancelBnp = document.getElementById('cancel-bnp');
 cancelBnp.onclick = function () {
@@ -116,4 +114,4 @@ cancelBnp.onclick = function () {
   checkboxDiv[0].classList.remove('w--redirected-checked');
   let checkboxInput = document.getElementById('tac-bnp');
   checkboxInput.checked = false;
-}
+};
