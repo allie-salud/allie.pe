@@ -72,7 +72,7 @@ let acceptTyc = document.getElementById('accept-tyc');
 acceptTyc.onclick = function () {
   let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
   checkboxDiv[0].classList.add('w--redirected-checked');
-  let checkboxInput = document.getElementById('tac-tyc');
+  let checkboxInput = document.getElementById('checkbox-tyc');
   checkboxInput.checked = true;
   let today = new Date();
   let date =
@@ -87,7 +87,7 @@ let cancelTyc = document.getElementById('cancel-tyc');
 cancelTyc.onclick = function () {
   let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
   checkboxDiv[0].classList.remove('w--redirected-checked');
-  let checkboxInput = document.getElementById('tac-tyc');
+  let checkboxInput = document.getElementById('checkbox-tyc');
   checkboxInput.checked = false;
 };
 
@@ -95,7 +95,7 @@ let acceptPdd = document.getElementById('accept-pdd');
 acceptPdd.onclick = function () {
   let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
   checkboxDiv[0].classList.add('w--redirected-checked');
-  let checkboxInput = document.getElementById('tac-tyc');
+  let checkboxInput = document.getElementById('checkbox-tyc');
   checkboxInput.checked = true;
   let today = new Date();
   let date =
@@ -110,7 +110,7 @@ let cancelPdd = document.getElementById('cancel-pdd');
 cancelPdd.onclick = function () {
   let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
   checkboxDiv[0].classList.remove('w--redirected-checked');
-  let checkboxInput = document.getElementById('tac-tyc');
+  let checkboxInput = document.getElementById('checkbox-tyc');
   checkboxInput.checked = false;
 };
 
@@ -118,7 +118,7 @@ let acceptBnp = document.getElementById('accept-bnp');
 acceptBnp.onclick = function () {
   let checkboxDiv = document.getElementsByClassName('checkbox-bnp');
   checkboxDiv[0].classList.add('w--redirected-checked');
-  let checkboxInput = document.getElementById('tac-bnp');
+  let checkboxInput = document.getElementById('checkbox-bnp');
   checkboxInput.checked = true;
   let today = new Date();
   let date =
@@ -133,11 +133,11 @@ let cancelBnp = document.getElementById('cancel-bnp');
 cancelBnp.onclick = function () {
   let checkboxDiv = document.getElementsByClassName('checkbox-bnp');
   checkboxDiv[0].classList.remove('w--redirected-checked');
-  let checkboxInput = document.getElementById('tac-bnp');
+  let checkboxInput = document.getElementById('checkbox-bnp');
   checkboxInput.checked = false;
 };
 
-$('#tac-tyc').on('change', function () {
+$('#checkbox-tyc').on('change', function () {
   let today = new Date();
   let date =
     today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
@@ -147,7 +147,7 @@ $('#tac-tyc').on('change', function () {
   document.getElementById('input-date-tyc').value = dateAndHour;
 });
 
-$('#tac-bnp').on('change', function () {
+$('#checkbox-bnp').on('change', function () {
   let today = new Date();
   let date =
     today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
