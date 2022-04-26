@@ -11,6 +11,8 @@ var FIELDS = {
   PHONE: $('#phone'),
   COUNTRY_CODE: $('#id_numero_codigo_area'),
   EMAIL: $('#email'),
+  TYC: $('#checkbox-tyc'),
+  BNP: $('#checkbox-bnp'),
   ADDRESS: $('#direccion'),
   DISTRICT: $('#distrito'),
   FIRST_DELIVERY_DATE_STR: $('#subscription_startdate'),
@@ -108,7 +110,6 @@ var FIRST_DELIVERY_DATE_PICKER =
 FIELDS.FIRST_DELIVERY_DATE_STR.on('change', function () {
   if ((this.value && this.validity.customError) || this.checkValidity()) {
     var dateParts = this.value.split('/');
-    console.log('delivery_dateParts', dateParts);
     var date = new Date(
       parseInt(dateParts[2]),
       parseInt(dateParts[1]) - 1,
@@ -166,7 +167,11 @@ window.app = new Vue({
     },
     cartWithProducts: function () {},
     methodSubtotal: function () {
-      return this.subscription.method.price || 0;
+      return (
+        (this.subscription.method.is_once
+          ? 0
+          : this.subscription.method.price) || 0
+      );
     },
     productsSubtotal: function () {
       return this.subscription.products
@@ -176,11 +181,14 @@ window.app = new Vue({
         }, 0);
     },
     oneTimeAmount: function () {
-      return this.subscription.products
-        .filter((product) => product.is_once)
-        .reduce(function (sum, product) {
-          return sum + product.price * product.quantity;
-        }, 0);
+      return (
+        this.subscription.products
+          .filter((product) => product.is_once)
+          .reduce(function (sum, product) {
+            return sum + product.price * product.quantity;
+          }, 0) +
+        (this.subscription.method.is_once ? this.subscription.method.price : 0)
+      );
     },
     deliverySubtotal: function () {
       return 5;
@@ -300,9 +308,9 @@ window.app = new Vue({
             FIELDS.GIVEN_NAME,
             FIELDS.FAMILY_NAME,
             FIELDS.BIRTHDATE_STR,
-            // FIELDS.BIRTHDATE,
             FIELDS.PHONE,
             FIELDS.EMAIL,
+            FIELDS.TYC,
           ];
 
           for (var i = 0; i < inputs.length; i++) {
@@ -313,7 +321,7 @@ window.app = new Vue({
                 'Por favor, ingresa correctamente todos los campos requeridos.';
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper'
+                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc'
                 )
                 .addClass('invalid');
               // _input.reportValidity()
@@ -321,7 +329,7 @@ window.app = new Vue({
             } else {
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper'
+                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc'
                 )
                 .removeClass('invalid');
             }
@@ -430,7 +438,6 @@ window.app = new Vue({
       );
     },
     updateCart: function (productData, event) {
-      console.log('🚀 ~ file: vueApp.js ~ line 348 ~ productData', productData);
       var quantity = parseInt(event.target.value);
       if (Number.isInteger(quantity)) {
         var cartItemIndex = this.subscription.products.findIndex(function (
@@ -452,6 +459,7 @@ window.app = new Vue({
                   is_once: productData.is_once,
                   quantity: quantity,
                   active_one_time: productData.active_one_time,
+                  require_prescription: productData.require_prescription,
                 },
               ],
             },
@@ -470,6 +478,7 @@ window.app = new Vue({
             quantity: quantity,
             is_once: productData.is_once,
             active_one_time: productData.active_one_time,
+            require_prescription: productData.require_prescription,
             _type: productData._type,
           });
         } else {
@@ -488,19 +497,21 @@ window.app = new Vue({
       this.validateForm(1);
     },
     onChangeMethod: function () {
+      const subscriptionMethod = this.subscription.method;
       window.dataLayer.push({
         ecommerce: {
           add: {
             products: [
               {
-                id: this.subscription.method.slug,
-                name: this.subscription.method.title,
-                price: this.subscription.method.price,
-                brand: this.subscription.method.lab,
+                id: subscriptionMethod.slug,
+                name: subscriptionMethod.title,
+                price: subscriptionMethod.price,
+                brand: subscriptionMethod.lab,
                 category: 'Anticonceptivo',
-                is_once: this.subscription.method.is_once,
-                variant: this.subscription.method.presentation,
-                active_one_time: this.subscription.method.active_one_time,
+                is_once: subscriptionMethod.is_once,
+                variant: subscriptionMethod.presentation,
+                active_one_time: subscriptionMethod.active_one_time,
+                require_prescription: subscriptionMethod.require_prescription,
                 quantity: 1,
               },
             ],
@@ -531,6 +542,7 @@ window.app = new Vue({
           is_once: product.is_once,
           quantity: product.quantity,
           active_one_time: product.active_one_time,
+          require_prescription: product.require_prescription,
         };
       });
       productsDataLayer.push({
@@ -542,6 +554,7 @@ window.app = new Vue({
         category: 'Anticonceptivo',
         variant: this.subscription.method.presentation,
         active_one_time: this.subscription.method.active_one_time,
+        require_prescription: this.subscription.method.require_prescription,
         quantity: 1,
       });
       window.dataLayer.push({
@@ -595,6 +608,14 @@ window.app = new Vue({
           break;
       }
       return visible;
+    },
+    changeOneTimeMethod(item, product) {
+      this.subscription.method.is_once = !this.subscription.method.is_once;
+      if (this.subscription.method.is_once) {
+        item.target.classList.add('w--redirected-checked');
+      } else {
+        item.target.classList.remove('w--redirected-checked');
+      }
     },
     changeOneTime(item, product) {
       product.is_once = !product.is_once;
