@@ -75,12 +75,7 @@ acceptTyc.onclick = function () {
   let checkboxInput = document.getElementById('checkbox-tyc');
   checkboxInput.checked = true;
   let today = new Date();
-  let date =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-  let hour =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  let dateAndHour = date + ' ' + hour;
-  document.getElementById('input-date-tyc').value = dateAndHour;
+  document.getElementById('input-date-tyc').value = today.toISOString();
 };
 
 let cancelTyc = document.getElementById('cancel-tyc');
@@ -98,12 +93,7 @@ acceptPdd.onclick = function () {
   let checkboxInput = document.getElementById('checkbox-tyc');
   checkboxInput.checked = true;
   let today = new Date();
-  let date =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-  let hour =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  let dateAndHour = date + ' ' + hour;
-  document.getElementById('input-date-tyc').value = dateAndHour;
+  document.getElementById('input-date-tyc').value = today.toISOString();
 };
 
 let cancelPdd = document.getElementById('cancel-pdd');
@@ -121,12 +111,7 @@ acceptBnp.onclick = function () {
   let checkboxInput = document.getElementById('checkbox-bnp');
   checkboxInput.checked = true;
   let today = new Date();
-  let date =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-  let hour =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  let dateAndHour = date + ' ' + hour;
-  document.getElementById('input-date-bnp').value = dateAndHour;
+  document.getElementById('input-date-bnp').value = today.toISOString();
 };
 
 let cancelBnp = document.getElementById('cancel-bnp');
@@ -139,20 +124,10 @@ cancelBnp.onclick = function () {
 
 $('#checkbox-tyc').on('change', function () {
   let today = new Date();
-  let date =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-  let hour =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  let dateAndHour = date + ' ' + hour;
-  document.getElementById('input-date-tyc').value = dateAndHour;
+  document.getElementById('input-date-tyc').value = today.toISOString();
 });
 
 $('#checkbox-bnp').on('change', function () {
   let today = new Date();
-  let date =
-    today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
-  let hour =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  let dateAndHour = date + ' ' + hour;
-  document.getElementById('input-date-bnp').value = dateAndHour;
+  document.getElementById('input-date-bnp').value = today.toISOString();
 });
