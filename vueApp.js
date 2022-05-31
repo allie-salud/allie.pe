@@ -1,30 +1,30 @@
-var PROMO_CODE_API_ENDPOINT = 'https://allie-promo-codes.pytel.workers.dev/';
+var PROMO_CODE_API_ENDPOINT = "https://allie-promo-codes.pytel.workers.dev/";
 
 var FIELDS = {
-  DOCUMENT_TYPE: $('#documento_tipo'),
-  DOCUMENT_NUMBER: $('#documento_numero'),
-  EMAIL: $('#email'),
-  GIVEN_NAME: $('#nombres'),
-  FAMILY_NAME: $('#apellidos'),
-  BIRTHDATE_STR: $('#birthdatestr'),
-  BIRTHDATE: $('#birthdate'),
-  PHONE: $('#phone'),
-  COUNTRY_CODE: $('#id_numero_codigo_area'),
-  EMAIL: $('#email'),
-  TYC: $('#checkbox-tyc'),
-  BNP: $('#checkbox-bnp'),
-  ADDRESS: $('#direccion'),
-  DISTRICT: $('#distrito'),
-  FIRST_DELIVERY_DATE_STR: $('#subscription_startdate'),
-  FIRST_DELIVERY_DATE: $('#id_fecha_entrega'),
-  FIRST_DELIVERY_SCHEDULE: $('#horario_entrega'),
-  COUPON_CODE: $('#coupon_code'),
+  DOCUMENT_TYPE: $("#documento_tipo"),
+  DOCUMENT_NUMBER: $("#documento_numero"),
+  EMAIL: $("#email"),
+  GIVEN_NAME: $("#nombres"),
+  FAMILY_NAME: $("#apellidos"),
+  BIRTHDATE_STR: $("#birthdatestr"),
+  BIRTHDATE: $("#birthdate"),
+  PHONE: $("#phone"),
+  COUNTRY_CODE: $("#id_numero_codigo_area"),
+  EMAIL: $("#email"),
+  TYC: $("#checkbox-tyc"),
+  BNP: $("#checkbox-bnp"),
+  ADDRESS: $("#direccion"),
+  DISTRICT: $("#distrito"),
+  FIRST_DELIVERY_DATE_STR: $("#subscription_startdate"),
+  FIRST_DELIVERY_DATE: $("#id_fecha_entrega"),
+  FIRST_DELIVERY_SCHEDULE: $("#horario_entrega"),
+  COUPON_CODE: $("#coupon_code"),
 };
 
 const uuid = () =>
-  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;
-    const v = c == 'x' ? r : (r & 0x3) | 0x8;
+    const v = c == "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 
@@ -32,36 +32,36 @@ var NUMERIC_INPUTS = [FIELDS.DOCUMENT_NUMBER, FIELDS.PHONE];
 
 var ONLY_DIGITS = function (value) {
   if (/\D/g.test(value)) {
-    value = value.replace(/\D/g, '');
+    value = value.replace(/\D/g, "");
   }
   return value;
 };
 
 for (var i = 0; i < NUMERIC_INPUTS.length; i++) {
   var _field = NUMERIC_INPUTS[i];
-  _field.on('input', function () {
+  _field.on("input", function () {
     this.value = ONLY_DIGITS(this.value);
   });
 }
 
 // FIELDS.DOCUMENT_NUMBER.removeAttr('role');
-FIELDS.DOCUMENT_TYPE.on('change', function () {
-  FIELDS.DOCUMENT_NUMBER.val('');
-  FIELDS.DOCUMENT_NUMBER.off('input');
+FIELDS.DOCUMENT_TYPE.on("change", function () {
+  FIELDS.DOCUMENT_NUMBER.val("");
+  FIELDS.DOCUMENT_NUMBER.off("input");
 
-  if (this.value == 'dni') {
-    FIELDS.DOCUMENT_NUMBER.attr('inputmode', 'numeric');
-    FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9]{8}');
-    FIELDS.DOCUMENT_NUMBER.attr('minlength', 8);
-    FIELDS.DOCUMENT_NUMBER.attr('maxlength', 8);
-    FIELDS.DOCUMENT_NUMBER.on('input', function () {
+  if (this.value == "dni") {
+    FIELDS.DOCUMENT_NUMBER.attr("inputmode", "numeric");
+    FIELDS.DOCUMENT_NUMBER.attr("pattern", "[0-9]{8}");
+    FIELDS.DOCUMENT_NUMBER.attr("minlength", 8);
+    FIELDS.DOCUMENT_NUMBER.attr("maxlength", 8);
+    FIELDS.DOCUMENT_NUMBER.on("input", function () {
       this.value = ONLY_DIGITS(this.value);
     });
   } else {
-    FIELDS.DOCUMENT_NUMBER.attr('inputmode', 'text');
-    FIELDS.DOCUMENT_NUMBER.attr('pattern', '[0-9a-zA-Z]{8,12}');
-    FIELDS.DOCUMENT_NUMBER.attr('minlength', 8);
-    FIELDS.DOCUMENT_NUMBER.attr('maxlength', 12);
+    FIELDS.DOCUMENT_NUMBER.attr("inputmode", "text");
+    FIELDS.DOCUMENT_NUMBER.attr("pattern", "[0-9a-zA-Z]{8,12}");
+    FIELDS.DOCUMENT_NUMBER.attr("minlength", 8);
+    FIELDS.DOCUMENT_NUMBER.attr("maxlength", 12);
   }
 });
 
@@ -70,55 +70,55 @@ var TODAY_STR = TODAY_DATE.toISOString().slice(0, 10);
 var HUNDRED_YEARS_AGO = new Date(TODAY_DATE.getFullYear() - 100, 0, 1);
 var HUNDRED_YEARS_AGO_STR = HUNDRED_YEARS_AGO.toISOString().slice(0, 10);
 
-FIELDS.BIRTHDATE.attr('max', TODAY_STR);
-FIELDS.BIRTHDATE.attr('min', HUNDRED_YEARS_AGO_STR);
+FIELDS.BIRTHDATE.attr("max", TODAY_STR);
+FIELDS.BIRTHDATE.attr("min", HUNDRED_YEARS_AGO_STR);
 
-FIELDS.BIRTHDATE_STR.on('change blur', function () {
+FIELDS.BIRTHDATE_STR.on("change blur", function () {
   var self = this;
   setTimeout(function () {
-    if (self.value == '00/00/0000') {
-      self.value = '';
+    if (self.value == "00/00/0000") {
+      self.value = "";
       window.app.validateForm(2);
     } else if (!self.checkValidity() && !self.validity.customError) {
       self.reportValidity();
     } else {
       var bd_element = FIELDS.BIRTHDATE.get(0);
-      var date_parts = self.value.split('/');
-      var date_obj_parts = bd_element.value.split('-').reverse();
+      var date_parts = self.value.split("/");
+      var date_obj_parts = bd_element.value.split("-").reverse();
 
       if (date_parts.join() == date_obj_parts.join()) {
         if (!bd_element.checkValidity()) {
           self.setCustomValidity(bd_element.validationMessage);
           window.app.validateForm(2);
         } else {
-          self.setCustomValidity('');
+          self.setCustomValidity("");
         }
       } else {
-        self.setCustomValidity('Por favor elija una fecha válida');
+        self.setCustomValidity("Por favor elija una fecha válida");
         self.reportValidity();
       }
     }
   }, 10);
 });
 
-FIELDS.FIRST_DELIVERY_DATE_STR.on('keydown', function () {
+FIELDS.FIRST_DELIVERY_DATE_STR.on("keydown", function () {
   return false;
 });
 
 var FIRST_DELIVERY_DATE_PICKER =
-  FIELDS.FIRST_DELIVERY_DATE_STR.data('datepicker');
-FIELDS.FIRST_DELIVERY_DATE_STR.on('change', function () {
+  FIELDS.FIRST_DELIVERY_DATE_STR.data("datepicker");
+FIELDS.FIRST_DELIVERY_DATE_STR.on("change", function () {
   if ((this.value && this.validity.customError) || this.checkValidity()) {
-    var dateParts = this.value.split('/');
+    var dateParts = this.value.split("/");
     var date = new Date(
       parseInt(dateParts[2]),
       parseInt(dateParts[1]) - 1,
       dateParts[0]
     );
     if (date < FIRST_DELIVERY_DATE_PICKER.minDate || isDisabled(date)) {
-      this.setCustomValidity('Por favor elija una fecha válida.');
+      this.setCustomValidity("Por favor elija una fecha válida.");
     } else {
-      this.setCustomValidity('');
+      this.setCustomValidity("");
     }
     window.app.validateForm(3);
     FIRST_DELIVERY_DATE_PICKER.selectDate(date);
@@ -130,20 +130,20 @@ FIELDS.FIRST_DELIVERY_DATE_STR.on('change', function () {
 function _round2(dec) {
   return Math.round((dec + Number.EPSILON) * 100) / 100;
 }
-Vue.filter('prepend', function (value, prependValue) {
+Vue.filter("prepend", function (value, prependValue) {
   return prependValue + value;
 });
-Vue.filter('currencyValue', function (value) {
+Vue.filter("currencyValue", function (value) {
   return _round2(value).toFixed(2);
 });
-Vue.filter('percentageString', function (value) {
-  return _round2(value * 100).toFixed(0) + '%';
+Vue.filter("percentageString", function (value) {
+  return _round2(value * 100).toFixed(0) + "%";
 });
-Vue.filter('toJsonString', function (object) {
+Vue.filter("toJsonString", function (object) {
   return JSON.stringify(object);
 });
 window.app = new Vue({
-  el: '#subscribe-form',
+  el: "#subscribe-form",
   data: {
     invalidCoupon: false,
     loadingCoupon: false,
@@ -249,19 +249,19 @@ window.app = new Vue({
   },
   methods: {
     applyCode: function () {
-      FIELDS.COUPON_CODE = $('#coupon_code');
+      FIELDS.COUPON_CODE = $("#coupon_code");
 
-      var APPLY_COUPON_BUTTON = $('#couponApply');
-      if (APPLY_COUPON_BUTTON.hasClass('disabled')) return;
+      var APPLY_COUPON_BUTTON = $("#couponApply");
+      if (APPLY_COUPON_BUTTON.hasClass("disabled")) return;
       var self = this;
       var couponEntered = FIELDS.COUPON_CODE.val();
       self.loadingCoupon = true;
-      APPLY_COUPON_BUTTON.text('⏳');
-      APPLY_COUPON_BUTTON.addClass('disabled');
+      APPLY_COUPON_BUTTON.text("⏳");
+      APPLY_COUPON_BUTTON.addClass("disabled");
 
       $.ajax({
         url: PROMO_CODE_API_ENDPOINT,
-        type: 'GET',
+        type: "GET",
         data: { code: couponEntered },
         success: function (data) {
           self.coupon = data.results[0];
@@ -276,13 +276,13 @@ window.app = new Vue({
         },
         complete: function () {
           self.loadingCoupon = false;
-          APPLY_COUPON_BUTTON.text('Aplicar');
-          APPLY_COUPON_BUTTON.removeClass('disabled');
+          APPLY_COUPON_BUTTON.text("Aplicar");
+          APPLY_COUPON_BUTTON.removeClass("disabled");
         },
       });
     },
     removeCoupon: function () {
-      FIELDS.COUPON_CODE.val('');
+      FIELDS.COUPON_CODE.val("");
       this.coupon = null;
     },
     validateForm: function (index) {
@@ -292,9 +292,9 @@ window.app = new Vue({
             this.methodSubtotal + this.productsSubtotal + this.oneTimeAmount;
           if (noDelivery > 0 && noDelivery < 15.0) {
             this.errors[index] =
-              'Uy! Tu compra debe ser igual o mayor a S/15 (sin contar el delivery).';
+              "Uy! Tu compra debe ser igual o mayor a S/15 (sin contar el delivery).";
           } else if (noDelivery == 0) {
-            this.errors[index] = 'No tienes productos en el carrito';
+            this.errors[index] = "No tienes productos en el carrito";
           } else {
             this.errors[index] = false;
           }
@@ -318,20 +318,20 @@ window.app = new Vue({
 
             if (!_input.checkValidity()) {
               error =
-                'Por favor, ingresa correctamente todos los campos requeridos.';
+                "Por favor, ingresa correctamente todos los campos requeridos.";
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc'
+                  ".form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc"
                 )
-                .addClass('invalid');
+                .addClass("invalid");
               // _input.reportValidity()
               // break;
             } else {
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc'
+                  ".form-input-group, .form-input-field, .form-input-wrapper, .form-input-tyc"
                 )
-                .removeClass('invalid');
+                .removeClass("invalid");
             }
           }
           if (error) {
@@ -355,19 +355,19 @@ window.app = new Vue({
 
             if (!_input.checkValidity()) {
               error =
-                'Por favor, ingresa correctamente todos los campos requeridos.';
+                "Por favor, ingresa correctamente todos los campos requeridos.";
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper'
+                  ".form-input-group, .form-input-field, .form-input-wrapper"
                 )
-                .addClass('invalid');
+                .addClass("invalid");
               // _input.reportValidity()
             } else {
               inputs[i]
                 .closest(
-                  '.form-input-group, .form-input-field, .form-input-wrapper'
+                  ".form-input-group, .form-input-field, .form-input-wrapper"
                 )
-                .removeClass('invalid');
+                .removeClass("invalid");
             }
           }
 
@@ -383,16 +383,16 @@ window.app = new Vue({
 
           if (
             !selected ||
-            (selected == 'kushki' && !$('#kushki_token_input').val())
+            (selected == "kushki" && !$("#kushki_token_input").val())
           ) {
-            $('[name="medio_pago"]').prop('checked', false);
-            $('.card-pago .w-radio-input').removeClass('w--redirected-checked');
-            this.errors[index] = 'Por favor, seleccione un método de pago.';
+            $('[name="medio_pago"]').prop("checked", false);
+            $(".card-pago .w-radio-input").removeClass("w--redirected-checked");
+            this.errors[index] = "Por favor, seleccione un método de pago.";
           } else {
-            if (selected == 'kushki') {
+            if (selected == "kushki") {
               $(
-                '.subscription-payment-automatic .card-pago .w-radio-input'
-              ).addClass('w--redirected-checked');
+                ".subscription-payment-automatic .card-pago .w-radio-input"
+              ).addClass("w--redirected-checked");
             }
             this.errors[index] = false;
           }
@@ -407,11 +407,11 @@ window.app = new Vue({
     },
     removeMethod: function () {
       this.subscription.method = {};
-      $('.product-select-radio-button-wrapper input')
-        .prop('checked', false)
+      $(".product-select-radio-button-wrapper input")
+        .prop("checked", false)
         .parent()
         .parent()
-        .removeClass('selected');
+        .removeClass("selected");
       this.validateForm(1);
     },
     setCard: function (lastDigits, expiryDate) {
@@ -464,7 +464,7 @@ window.app = new Vue({
               ],
             },
           },
-          event: 'addToCart',
+          event: "addToCart",
         });
         if (cartItemIndex < 0) {
           this.subscription.products.push({
@@ -478,6 +478,7 @@ window.app = new Vue({
             quantity: quantity,
             is_once: productData.is_once,
             active_one_time: productData.active_one_time,
+            active_benefit: productData.active_benefit,
             require_prescription: productData.require_prescription,
             _type: productData._type,
           });
@@ -489,10 +490,10 @@ window.app = new Vue({
             this.subscription.products[cartItemIndex].quantity = quantity;
           }
         }
-        document.getElementById('input_qty_' + productData.slug).value =
+        document.getElementById("input_qty_" + productData.slug).value =
           quantity;
       } else {
-        console.error('Not a valid quantity');
+        console.error("Not a valid quantity");
       }
       this.validateForm(1);
     },
@@ -507,7 +508,7 @@ window.app = new Vue({
                 name: subscriptionMethod.title,
                 price: subscriptionMethod.price,
                 brand: subscriptionMethod.lab,
-                category: 'Anticonceptivo',
+                category: "Anticonceptivo",
                 is_once: subscriptionMethod.is_once,
                 variant: subscriptionMethod.presentation,
                 active_one_time: subscriptionMethod.active_one_time,
@@ -517,17 +518,17 @@ window.app = new Vue({
             ],
           },
         },
-        event: 'addToCart',
+        event: "addToCart",
       });
       this.validateForm(1);
     },
     onClickSubscription: function () {
       let idSubscription = document.getElementById(
-        'kushki_subscriptionId_input'
+        "kushki_subscriptionId_input"
       );
       idSubscription = idSubscription.value;
       let revenueDataLayer =
-        document.getElementsByClassName('totalamountvalue');
+        document.getElementsByClassName("totalamountvalue");
       revenueDataLayer = parseInt(revenueDataLayer[0].innerText);
       let productsDataLayer = this.subscription.products.map(function (
         product
@@ -551,7 +552,7 @@ window.app = new Vue({
         price: this.subscription.method.price,
         brand: this.subscription.method.lab,
         is_once: this.subscription.method.is_once,
-        category: 'Anticonceptivo',
+        category: "Anticonceptivo",
         variant: this.subscription.method.presentation,
         active_one_time: this.subscription.method.active_one_time,
         require_prescription: this.subscription.method.require_prescription,
@@ -562,7 +563,7 @@ window.app = new Vue({
           purchase: {
             actionField: {
               id: isEmpty(idSubscription) ? uuid() : idSubscription,
-              affiliation: 'Allie',
+              affiliation: "Allie",
               revenue: revenueDataLayer,
               tax: revenueDataLayer * 0.18,
               shipping: this.deliverySubtotal,
@@ -570,7 +571,7 @@ window.app = new Vue({
             products: productsDataLayer,
           },
         },
-        event: 'orderPurchase',
+        event: "orderPurchase",
       });
     },
     showTotal: function (caseValue) {
@@ -612,9 +613,9 @@ window.app = new Vue({
     changeOneTimeMethod(item, product) {
       this.subscription.method.is_once = !this.subscription.method.is_once;
       if (this.subscription.method.is_once) {
-        item.target.classList.add('w--redirected-checked');
+        item.target.classList.add("w--redirected-checked");
       } else {
-        item.target.classList.remove('w--redirected-checked');
+        item.target.classList.remove("w--redirected-checked");
       }
     },
     changeOneTime(item, product) {
@@ -627,9 +628,9 @@ window.app = new Vue({
       });
       this.subscription.products = productsChanges;
       if (product.is_once) {
-        item.target.classList.add('w--redirected-checked');
+        item.target.classList.add("w--redirected-checked");
       } else {
-        item.target.classList.remove('w--redirected-checked');
+        item.target.classList.remove("w--redirected-checked");
       }
     },
   },
