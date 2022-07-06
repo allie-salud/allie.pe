@@ -191,7 +191,7 @@ window.app = new Vue({
       );
     },
     deliverySubtotal: function () {
-      return 5;
+      return 0;
     },
     subscriptionTotal: function () {
       return (
