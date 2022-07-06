@@ -210,7 +210,10 @@ window.app = new Vue({
     firstDeliveryTotal: function () {
       let ticketValueForDiscounts = this.methodSubtotal + this.productsSubtotal;
       let discountValue = 0;
-      if (this.coupon !== null) {
+      if (
+        this.coupon !== null &&
+        this.coupon.conditions.minimumTicketValue <= ticketValueForDiscounts
+      ) {
         if (this.coupon.conditions.appliesToDelivery) {
           ticketValueForDiscounts += this.deliverySubtotal;
         }
