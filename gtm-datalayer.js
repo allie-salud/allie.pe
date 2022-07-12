@@ -1,133 +1,142 @@
-let continuePersonalData = document.getElementById('continue-personal-data');
+let continuePersonalData = document.getElementById("continue-personal-data");
 continuePersonalData.onclick = function () {
   window.dataLayer.push({
     virtual: {
-      page: '/datos-personales',
+      page: "/datos-personales",
     },
-    event: 'trackVirtual',
+    event: "trackVirtual",
+  });
+  window.dataLayer.push({
+    event: "suscripcion_paso1",
   });
 };
 
-let continueSendingData = document.getElementById('continue-sending-data');
+let continueSendingData = document.getElementById("continue-sending-data");
 continueSendingData.onclick = function () {
   window.dataLayer.push({
     virtual: {
-      page: '/datos-envio',
+      page: "/datos-envio",
     },
-    event: 'trackVirtual',
+    event: "trackVirtual",
+  });
+  window.dataLayer.push({
+    event: "suscripcion_paso2",
   });
 };
 
-let continuePaymentMethod = document.getElementById('continue-payment-method');
+let continuePaymentMethod = document.getElementById("continue-payment-method");
 continuePaymentMethod.onclick = function () {
   window.dataLayer.push({
     virtual: {
-      page: '/metodo-pago',
+      page: "/metodo-pago",
     },
-    event: 'trackVirtual',
+    event: "trackVirtual",
+  });
+  window.dataLayer.push({
+    event: "suscripcion_paso3",
   });
 };
 
 let paymentMethodOptions = document.querySelectorAll('[name="medio_pago"]');
 paymentMethodOptions.forEach(function (item) {
   item.onclick = function () {
-    const paymentMethod = item.getAttribute('value');
-    let textValue = '';
+    const paymentMethod = item.getAttribute("value");
+    let textValue = "";
     switch (paymentMethod) {
-      case 'pos':
-        textValue = 'POS contra entrega';
+      case "pos":
+        textValue = "POS contra entrega";
         break;
-      case 'yape':
-        textValue = 'Yape';
+      case "yape":
+        textValue = "Yape";
         break;
-      case 'transferencia':
-        textValue = 'Transferencia';
+      case "transferencia":
+        textValue = "Transferencia";
         break;
-      case 'pagolink':
-        textValue = 'Pago Link / Enlace de pago';
+      case "pagolink":
+        textValue = "Pago Link / Enlace de pago";
         break;
     }
     window.dataLayer.push({
       action: {
-        category: 'Método de pago',
-        name: 'Elegir medio de pago',
+        category: "Método de pago",
+        name: "Elegir medio de pago",
         label: textValue,
       },
-      event: 'trackAction',
+      event: "trackAction",
     });
   };
 });
 
-let recurringCardPayment = document.getElementById('recurring-card-payment');
+let recurringCardPayment = document.getElementById("recurring-card-payment");
 recurringCardPayment.onclick = function () {
   window.dataLayer.push({
     virtual: {
-      page: '/ingresar-tarjeta',
+      page: "/ingresar-tarjeta",
     },
-    event: 'trackVirtual',
+    event: "trackVirtual",
   });
 };
 
-let acceptTyc = document.getElementById('accept-tyc');
+let acceptTyc = document.getElementById("accept-tyc");
 acceptTyc.onclick = function () {
-  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
-  checkboxDiv[0].classList.add('w--redirected-checked');
-  let checkboxInput = document.getElementById('checkbox-tyc');
+  let checkboxDiv = document.getElementsByClassName("checkbox-tyc");
+  checkboxDiv[0].classList.add("w--redirected-checked");
+  let checkboxInput = document.getElementById("checkbox-tyc");
   checkboxInput.checked = true;
   let today = new Date();
-  document.getElementById('input-date-tyc').value = today.toISOString();
+  document.getElementById("input-date-tyc").value = today.toISOString();
 };
 
-let cancelTyc = document.getElementById('cancel-tyc');
+let cancelTyc = document.getElementById("cancel-tyc");
 cancelTyc.onclick = function () {
-  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
-  checkboxDiv[0].classList.remove('w--redirected-checked');
-  let checkboxInput = document.getElementById('checkbox-tyc');
+  let checkboxDiv = document.getElementsByClassName("checkbox-tyc");
+  checkboxDiv[0].classList.remove("w--redirected-checked");
+  let checkboxInput = document.getElementById("checkbox-tyc");
   checkboxInput.checked = false;
 };
 
-let acceptPdd = document.getElementById('accept-pdd');
+let acceptPdd = document.getElementById("accept-pdd");
 acceptPdd.onclick = function () {
-  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
-  checkboxDiv[0].classList.add('w--redirected-checked');
-  let checkboxInput = document.getElementById('checkbox-tyc');
+  let checkboxDiv = document.getElementsByClassName("checkbox-tyc");
+  checkboxDiv[0].classList.add("w--redirected-checked");
+  let checkboxInput = document.getElementById("checkbox-tyc");
   checkboxInput.checked = true;
   let today = new Date();
-  document.getElementById('input-date-tyc').value = today.toISOString();
+  document.getElementById("input-date-tyc").value = today.toISOString();
 };
 
-let cancelPdd = document.getElementById('cancel-pdd');
+let cancelPdd = document.getElementById("cancel-pdd");
 cancelPdd.onclick = function () {
-  let checkboxDiv = document.getElementsByClassName('checkbox-tyc');
-  checkboxDiv[0].classList.remove('w--redirected-checked');
-  let checkboxInput = document.getElementById('checkbox-tyc');
+  let checkboxDiv = document.getElementsByClassName("checkbox-tyc");
+  checkboxDiv[0].classList.remove("w--redirected-checked");
+  let checkboxInput = document.getElementById("checkbox-tyc");
   checkboxInput.checked = false;
 };
 
-let acceptBnp = document.getElementById('accept-bnp');
+let acceptBnp = document.getElementById("accept-bnp");
 acceptBnp.onclick = function () {
-  let checkboxDiv = document.getElementsByClassName('checkbox-bnp');
-  checkboxDiv[0].classList.add('w--redirected-checked');
-  let checkboxInput = document.getElementById('checkbox-bnp');
+  let checkboxDiv = document.getElementsByClassName("checkbox-bnp");
+  checkboxDiv[0].classList.add("w--redirected-checked");
+  let checkboxInput = document.getElementById("checkbox-bnp");
   checkboxInput.checked = true;
   let today = new Date();
-  document.getElementById('input-date-bnp').value = today.toISOString();
+  document.getElementById("input-date-bnp").value = today.toISOString();
 };
 
-let cancelBnp = document.getElementById('cancel-bnp');
+let cancelBnp = document.getElementById("cancel-bnp");
 cancelBnp.onclick = function () {
-  let checkboxDiv = document.getElementsByClassName('checkbox-bnp');
-  checkboxDiv[0].classList.remove('w--redirected-checked');
-  let checkboxInput = document.getElementById('checkbox-bnp');
+  let checkboxDiv = document.getElementsByClassName("checkbox-bnp");
+  checkboxDiv[0].classList.remove("w--redirected-checked");
+  let checkboxInput = document.getElementById("checkbox-bnp");
   checkboxInput.checked = false;
 };
 
-$('#checkbox-tyc').on('change', function () {
+$("#checkbox-tyc").on("change", function () {
   let today = new Date();
-  document.getElementById('input-date-tyc').value = today.toISOString();
+  document.getElementById("input-date-tyc").value = today.toISOString();
 });
 
-$('#checkbox-bnp').on('change', function () {
+$("#checkbox-bnp").on("change", function () {
   let today = new Date();
-  document.getElementById('input-date-bnp').value = today.toISOString();
+  document.getElementById("input-date-bnp").value = today.toISOString();
 });

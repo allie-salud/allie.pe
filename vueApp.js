@@ -577,6 +577,9 @@ window.app = new Vue({
         },
         event: "orderPurchase",
       });
+      window.dataLayer.push({
+        event: "suscripcion_completa",
+      });
     },
     showTotal: function (caseValue) {
       let visible = true;
